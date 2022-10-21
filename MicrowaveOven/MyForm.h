@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Microwave {
+namespace MicrowaveOven {
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -118,8 +118,13 @@ namespace Microwave {
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Label^ label3;
 
+private: System::Windows::Forms::Button^ DisplayBox;
+private: System::Windows::Forms::Label^ Display;
 
-	private: System::Windows::Forms::RichTextBox^ Display;
+
+
+
+
 
 	protected:
 
@@ -142,7 +147,6 @@ namespace Microwave {
 			this->Turntable = (gcnew System::Windows::Forms::Button());
 			this->Light = (gcnew System::Windows::Forms::Button());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->Display = (gcnew System::Windows::Forms::RichTextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->StopClear = (gcnew System::Windows::Forms::Button());
 			this->Increase30Sec = (gcnew System::Windows::Forms::Button());
@@ -182,6 +186,8 @@ namespace Microwave {
 			this->Potato = (gcnew System::Windows::Forms::Button());
 			this->Popcorn = (gcnew System::Windows::Forms::Button());
 			this->Vent = (gcnew System::Windows::Forms::Button());
+			this->DisplayBox = (gcnew System::Windows::Forms::Button());
+			this->Display = (gcnew System::Windows::Forms::Label());
 			this->panel1->SuspendLayout();
 			this->panel3->SuspendLayout();
 			this->panel2->SuspendLayout();
@@ -200,6 +206,7 @@ namespace Microwave {
 			this->Turntable->TabIndex = 0;
 			this->Turntable->Text = L"Turntable \nOn/Off";
 			this->Turntable->UseVisualStyleBackColor = false;
+			this->Turntable->Click += gcnew System::EventHandler(this, &MyForm::Turntable_Click);
 			// 
 			// Light
 			// 
@@ -213,13 +220,13 @@ namespace Microwave {
 			this->Light->TabIndex = 1;
 			this->Light->Text = L"Light";
 			this->Light->UseVisualStyleBackColor = false;
-			this->Light->Click += gcnew System::EventHandler(this, &MyForm::LightClick);
 			// 
 			// panel1
 			// 
 			this->panel1->BackColor = System::Drawing::Color::Transparent;
 			this->panel1->Controls->Add(this->Display);
 			this->panel1->Controls->Add(this->label2);
+			this->panel1->Controls->Add(this->DisplayBox);
 			this->panel1->Controls->Add(this->StopClear);
 			this->panel1->Controls->Add(this->Increase30Sec);
 			this->panel1->Controls->Add(this->Options);
@@ -246,18 +253,6 @@ namespace Microwave {
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(2047, 176);
 			this->panel1->TabIndex = 2;
-			// 
-			// Display
-			// 
-			this->Display->BackColor = System::Drawing::Color::Silver;
-			this->Display->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->Display->Location = System::Drawing::Point(935, 31);
-			this->Display->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->Display->Name = L"Display";
-			this->Display->Size = System::Drawing::Size(281, 96);
-			this->Display->TabIndex = 27;
-			this->Display->Text = L"";
 			// 
 			// label2
 			// 
@@ -760,6 +755,7 @@ namespace Microwave {
 			this->Popcorn->TabIndex = 0;
 			this->Popcorn->Text = L"Popcorn";
 			this->Popcorn->UseVisualStyleBackColor = false;
+			this->Popcorn->Click += gcnew System::EventHandler(this, &MyForm::Popcorn_Click);
 			// 
 			// Vent
 			// 
@@ -773,6 +769,26 @@ namespace Microwave {
 			this->Vent->TabIndex = 2;
 			this->Vent->Text = L"Vent";
 			this->Vent->UseVisualStyleBackColor = false;
+			// 
+			// DisplayBox
+			// 
+			this->DisplayBox->Location = System::Drawing::Point(931, 34);
+			this->DisplayBox->Name = L"DisplayBox";
+			this->DisplayBox->Size = System::Drawing::Size(281, 96);
+			this->DisplayBox->TabIndex = 3;
+			this->DisplayBox->UseVisualStyleBackColor = true;
+			// 
+			// Display
+			// 
+			this->Display->AutoSize = true;
+			this->Display->BackColor = System::Drawing::Color::Gainsboro;
+			this->Display->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.875F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->Display->Location = System::Drawing::Point(984, 70);
+			this->Display->Name = L"Display";
+			this->Display->Size = System::Drawing::Size(187, 25);
+			this->Display->TabIndex = 24;
+			this->Display->Text = L"Hello Hot Stuff :)";
 			// 
 			// MyForm
 			// 
@@ -803,7 +819,7 @@ namespace Microwave {
 	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void Turntable_Click(System::Object^ sender, System::EventArgs^ e) {
-
+		Display->Text = "Turntable ON";
 		
 	}
 	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
@@ -815,17 +831,9 @@ private: System::Void label6_Click(System::Object^ sender, System::EventArgs^ e)
 private: System::Void PowerGrillAuto_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void Popcorn_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void LightClick(System::Object^ sender, System::EventArgs^ e) {
-	Light::Light()
-	{
-		currentState = LightState::Off;
-	}
+	Display->Text = "Popcorn";
 
-	void Light::toggle()
-	{
-		currentState = lightTransitions[currentState];
-	}
 }
+
 };
 }
