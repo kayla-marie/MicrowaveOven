@@ -126,6 +126,9 @@ private: System::Windows::Forms::Label^ Display;
 
 
 
+
+
+
 	protected:
 
 	protected:
@@ -147,7 +150,9 @@ private: System::Windows::Forms::Label^ Display;
 			this->Turntable = (gcnew System::Windows::Forms::Button());
 			this->Light = (gcnew System::Windows::Forms::Button());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->Display = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->DisplayBox = (gcnew System::Windows::Forms::Button());
 			this->StopClear = (gcnew System::Windows::Forms::Button());
 			this->Increase30Sec = (gcnew System::Windows::Forms::Button());
 			this->Options = (gcnew System::Windows::Forms::Button());
@@ -186,8 +191,6 @@ private: System::Windows::Forms::Label^ Display;
 			this->Potato = (gcnew System::Windows::Forms::Button());
 			this->Popcorn = (gcnew System::Windows::Forms::Button());
 			this->Vent = (gcnew System::Windows::Forms::Button());
-			this->DisplayBox = (gcnew System::Windows::Forms::Button());
-			this->Display = (gcnew System::Windows::Forms::Label());
 			this->panel1->SuspendLayout();
 			this->panel3->SuspendLayout();
 			this->panel2->SuspendLayout();
@@ -254,6 +257,18 @@ private: System::Windows::Forms::Label^ Display;
 			this->panel1->Size = System::Drawing::Size(2047, 176);
 			this->panel1->TabIndex = 2;
 			// 
+			// Display
+			// 
+			this->Display->AutoSize = true;
+			this->Display->BackColor = System::Drawing::Color::Gainsboro;
+			this->Display->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.125F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->Display->Location = System::Drawing::Point(941, 45);
+			this->Display->Name = L"Display";
+			this->Display->Size = System::Drawing::Size(160, 48);
+			this->Display->TabIndex = 24;
+			this->Display->Text = L"Hey Hot Stuff!\nI\'m Mr. Waves ;)";
+			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
@@ -265,6 +280,14 @@ private: System::Windows::Forms::Label^ Display;
 			this->label2->Size = System::Drawing::Size(47, 20);
 			this->label2->TabIndex = 23;
 			this->label2->Text = L"3 sec";
+			// 
+			// DisplayBox
+			// 
+			this->DisplayBox->Location = System::Drawing::Point(931, 34);
+			this->DisplayBox->Name = L"DisplayBox";
+			this->DisplayBox->Size = System::Drawing::Size(281, 96);
+			this->DisplayBox->TabIndex = 3;
+			this->DisplayBox->UseVisualStyleBackColor = true;
 			// 
 			// StopClear
 			// 
@@ -278,6 +301,7 @@ private: System::Windows::Forms::Label^ Display;
 			this->StopClear->TabIndex = 22;
 			this->StopClear->Text = L"STOP CLEAR";
 			this->StopClear->UseVisualStyleBackColor = false;
+			this->StopClear->Click += gcnew System::EventHandler(this, &MyForm::Stop_Click);
 			// 
 			// Increase30Sec
 			// 
@@ -317,6 +341,7 @@ private: System::Windows::Forms::Label^ Display;
 			this->KeepWarm->TabIndex = 19;
 			this->KeepWarm->Text = L"Keep Warm";
 			this->KeepWarm->UseVisualStyleBackColor = false;
+			this->KeepWarm->Click += gcnew System::EventHandler(this, &MyForm::KeepWarm_Click);
 			// 
 			// Start
 			// 
@@ -356,6 +381,7 @@ private: System::Windows::Forms::Label^ Display;
 			this->KitchenTimer->TabIndex = 15;
 			this->KitchenTimer->Text = L"Kitchen\nTimer";
 			this->KitchenTimer->UseVisualStyleBackColor = false;
+			this->KitchenTimer->Click += gcnew System::EventHandler(this, &MyForm::KitchenTimer_Click);
 			// 
 			// OK
 			// 
@@ -588,10 +614,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->GrillMicrowave->BackColor = System::Drawing::Color::Transparent;
 			this->GrillMicrowave->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->GrillMicrowave->Location = System::Drawing::Point(804, 17);
+			this->GrillMicrowave->Location = System::Drawing::Point(791, 17);
 			this->GrillMicrowave->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->GrillMicrowave->Name = L"GrillMicrowave";
-			this->GrillMicrowave->Size = System::Drawing::Size(115, 55);
+			this->GrillMicrowave->Size = System::Drawing::Size(128, 55);
 			this->GrillMicrowave->TabIndex = 6;
 			this->GrillMicrowave->Text = L"Grill + \nMicrowave";
 			this->GrillMicrowave->UseVisualStyleBackColor = false;
@@ -617,7 +643,7 @@ private: System::Windows::Forms::Label^ Display;
 			this->Microwave->Location = System::Drawing::Point(529, 20);
 			this->Microwave->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->Microwave->Name = L"Microwave";
-			this->Microwave->Size = System::Drawing::Size(116, 41);
+			this->Microwave->Size = System::Drawing::Size(132, 41);
 			this->Microwave->TabIndex = 4;
 			this->Microwave->Text = L"Microwave";
 			this->Microwave->UseVisualStyleBackColor = false;
@@ -690,6 +716,7 @@ private: System::Windows::Forms::Label^ Display;
 			this->Veggies->TabIndex = 5;
 			this->Veggies->Text = L"Veggies";
 			this->Veggies->UseVisualStyleBackColor = false;
+			this->Veggies->Click += gcnew System::EventHandler(this, &MyForm::Veggies_Click);
 			// 
 			// Reheat
 			// 
@@ -703,6 +730,7 @@ private: System::Windows::Forms::Label^ Display;
 			this->Reheat->TabIndex = 4;
 			this->Reheat->Text = L"Reheat";
 			this->Reheat->UseVisualStyleBackColor = false;
+			this->Reheat->Click += gcnew System::EventHandler(this, &MyForm::Reheat_Click);
 			// 
 			// Cook
 			// 
@@ -716,6 +744,7 @@ private: System::Windows::Forms::Label^ Display;
 			this->Cook->TabIndex = 3;
 			this->Cook->Text = L"Cook";
 			this->Cook->UseVisualStyleBackColor = false;
+			this->Cook->Click += gcnew System::EventHandler(this, &MyForm::Cook_Click);
 			// 
 			// Pizza
 			// 
@@ -770,26 +799,6 @@ private: System::Windows::Forms::Label^ Display;
 			this->Vent->Text = L"Vent";
 			this->Vent->UseVisualStyleBackColor = false;
 			// 
-			// DisplayBox
-			// 
-			this->DisplayBox->Location = System::Drawing::Point(931, 34);
-			this->DisplayBox->Name = L"DisplayBox";
-			this->DisplayBox->Size = System::Drawing::Size(281, 96);
-			this->DisplayBox->TabIndex = 3;
-			this->DisplayBox->UseVisualStyleBackColor = true;
-			// 
-			// Display
-			// 
-			this->Display->AutoSize = true;
-			this->Display->BackColor = System::Drawing::Color::Gainsboro;
-			this->Display->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.875F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->Display->Location = System::Drawing::Point(984, 70);
-			this->Display->Name = L"Display";
-			this->Display->Size = System::Drawing::Size(187, 25);
-			this->Display->TabIndex = 24;
-			this->Display->Text = L"Hello Hot Stuff :)";
-			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
@@ -835,5 +844,24 @@ private: System::Void Popcorn_Click(System::Object^ sender, System::EventArgs^ e
 
 }
 
+private: System::Void Cook_Click(System::Object^ sender, System::EventArgs^ e) {
+	Display->Text = "Hey good lookin'\nWhat cha got cookin'?";
+
+}
+private: System::Void Reheat_Click(System::Object^ sender, System::EventArgs^ e) {
+	Display->Text = "Did you just come out\nof the oven?\nYou're HOT!";
+}
+private: System::Void KeepWarm_Click(System::Object^ sender, System::EventArgs^ e) {
+	Display->Text = "Keeping Warm";
+}
+private: System::Void KitchenTimer_Click(System::Object^ sender, System::EventArgs^ e) {
+	Display->Text = "T...";
+}
+private: System::Void Stop_Click(System::Object^ sender, System::EventArgs^ e) {
+	Display->Text = "Oh do behave";
+}
+private: System::Void Veggies_Click(System::Object^ sender, System::EventArgs^ e) {
+	Display->Text = "Veggin' out'\nwith my cucumber out";
+}
 };
 }
