@@ -445,6 +445,7 @@ namespace MicrowaveOven {
 			this->keyID0->TabIndex = 9;
 			this->keyID0->Text = L"0";
 			this->keyID0->UseVisualStyleBackColor = false;
+			this->keyID0->Click += gcnew System::EventHandler(this, &MyForm::keyID0_Click);
 			// 
 			// keyID9
 			// 
@@ -458,6 +459,7 @@ namespace MicrowaveOven {
 			this->keyID9->TabIndex = 8;
 			this->keyID9->Text = L"9";
 			this->keyID9->UseVisualStyleBackColor = false;
+			this->keyID9->Click += gcnew System::EventHandler(this, &MyForm::keyID9_Click);
 			// 
 			// keyID8
 			// 
@@ -471,6 +473,7 @@ namespace MicrowaveOven {
 			this->keyID8->TabIndex = 7;
 			this->keyID8->Text = L"8";
 			this->keyID8->UseVisualStyleBackColor = false;
+			this->keyID8->Click += gcnew System::EventHandler(this, &MyForm::keyID8_Click);
 			// 
 			// keyID7
 			// 
@@ -484,6 +487,7 @@ namespace MicrowaveOven {
 			this->keyID7->TabIndex = 6;
 			this->keyID7->Text = L"7";
 			this->keyID7->UseVisualStyleBackColor = false;
+			this->keyID7->Click += gcnew System::EventHandler(this, &MyForm::keyID7_Click);
 			// 
 			// keyID6
 			// 
@@ -497,6 +501,7 @@ namespace MicrowaveOven {
 			this->keyID6->TabIndex = 5;
 			this->keyID6->Text = L"6";
 			this->keyID6->UseVisualStyleBackColor = false;
+			this->keyID6->Click += gcnew System::EventHandler(this, &MyForm::keyID6_Click);
 			// 
 			// keyID5
 			// 
@@ -510,6 +515,7 @@ namespace MicrowaveOven {
 			this->keyID5->TabIndex = 4;
 			this->keyID5->Text = L"5";
 			this->keyID5->UseVisualStyleBackColor = false;
+			this->keyID5->Click += gcnew System::EventHandler(this, &MyForm::keyID5_Click);
 			// 
 			// keyID4
 			// 
@@ -523,6 +529,7 @@ namespace MicrowaveOven {
 			this->keyID4->TabIndex = 3;
 			this->keyID4->Text = L"4";
 			this->keyID4->UseVisualStyleBackColor = false;
+			this->keyID4->Click += gcnew System::EventHandler(this, &MyForm::keyID4_Click);
 			// 
 			// keyID3
 			// 
@@ -536,6 +543,7 @@ namespace MicrowaveOven {
 			this->keyID3->TabIndex = 2;
 			this->keyID3->Text = L"3";
 			this->keyID3->UseVisualStyleBackColor = false;
+			this->keyID3->Click += gcnew System::EventHandler(this, &MyForm::keyID3_Click);
 			// 
 			// keyID2
 			// 
@@ -549,6 +557,7 @@ namespace MicrowaveOven {
 			this->keyID2->TabIndex = 1;
 			this->keyID2->Text = L"2";
 			this->keyID2->UseVisualStyleBackColor = false;
+			this->keyID2->Click += gcnew System::EventHandler(this, &MyForm::keyID2_Click);
 			// 
 			// keyID1
 			// 
@@ -562,6 +571,7 @@ namespace MicrowaveOven {
 			this->keyID1->TabIndex = 0;
 			this->keyID1->Text = L"1";
 			this->keyID1->UseVisualStyleBackColor = false;
+			this->keyID1->Click += gcnew System::EventHandler(this, &MyForm::keyID1_Click);
 			// 
 			// Decrease10Sec
 			// 
@@ -1033,6 +1043,26 @@ namespace MicrowaveOven {
 			  // // Need to allow timer to reset when double pressed on stop
 			   //We can either set the timer to what the user specifies and decrement, or we can increment starting and 0 and stopping at user input time (which may be easier)
 
+	private: System::Void keyID1_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void keyID2_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void keyID3_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void keyID4_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void keyID5_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void keyID6_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void keyID7_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void keyID8_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void keyID9_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void keyID0_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
 	};
 }
 
