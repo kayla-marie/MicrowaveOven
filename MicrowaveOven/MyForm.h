@@ -1,6 +1,7 @@
 #include <chrono>
 #pragma once
 
+
 namespace MicrowaveOven {
 
 	using namespace System;
@@ -895,37 +896,29 @@ private: System::Void EcoMode_Click(System::Object^ sender, System::EventArgs^ e
 	}
 	isOn = !isOn;
 
+
 }
-private: void switch_light_state() {
-	enum light_state
-	{
-		Light_Off,
-		Light_Low,
-		Light_Medium,
-		Light_High,
-	};
-	light_state state = Light_Off;
-
-	switch (state) {
-	case light_state::Light_Off:
-		Display->Text = "Light Off";
-		break;
-	case light_state::Light_Low:
-		Display->Text = "Light Level Low";
-		break;
-
-	case light_state::Light_Medium:
-		Display->Text = "Light Level Medium";
-		break;
-
-	case light_state::Light_High:
-		Display->Text = "Light Level High";
-		break;
-	}
-};
 
 private: System::Void Light_Click(System::Object^ sender, System::EventArgs^ e) {
-	switch_light_state();
-}
+	static int lightState = 0;
+	switch (lightState) {
+	case 0:
+		Display->Text = "Light Off";
+		break;
+	case 1:
+		Display->Text = "Light Low";
+		break;
+	case 2:
+		Display->Text = "Light Medium";
+		break;
+	case 3:
+		Display->Text = "Light High";
+		break;
+	}
+	lightState++;
+	if (lightState == 4) {
+		lightState = 0;
+	}
+};
 };
 }
