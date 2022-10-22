@@ -965,16 +965,27 @@ namespace MicrowaveOven {
 	}
 
 	private: System::Void Microwave_Click(System::Object^ sender, System::EventArgs^ e) {
+		Display->Text = "Oven set to Microwave. Power Level:";
 	}
 	private: System::Void PowerGrill_Click(System::Object^ sender, System::EventArgs^ e) {
+		Display->Text = "Oven set to PowerGrill. Power Level:";
+
 	}
 	private: System::Void GrillMicrowave_Click(System::Object^ sender, System::EventArgs^ e) {
+		Display->Text = "Oven set to Grill. Power Level:";
+
 	}
 	private: System::Void AutoDefrost_Click(System::Object^ sender, System::EventArgs^ e) {
+		Display->Text = "Oven set to AutoDefrost.";
+
 	}
 	private: System::Void PoundDefrost_Click(System::Object^ sender, System::EventArgs^ e) {
+		Display->Text = "Oven set to Defrost. Power Level:";
+
 	}
 	private: System::Void PowerGrillAuto_Click(System::Object^ sender, System::EventArgs^ e) {
+		Display->Text = "Oven set to Auto PowerGrill. Power Level:";
+
 	}
 	private: System::Void Sound_Click(System::Object^ sender, System::EventArgs^ e) {
 		static int soundState = 0;
