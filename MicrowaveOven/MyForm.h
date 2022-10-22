@@ -151,9 +151,7 @@ private: System::Windows::Forms::Label^ Display;
 			this->Turntable = (gcnew System::Windows::Forms::Button());
 			this->Light = (gcnew System::Windows::Forms::Button());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->Display = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->DisplayBox = (gcnew System::Windows::Forms::Button());
 			this->StopClear = (gcnew System::Windows::Forms::Button());
 			this->Increase30Sec = (gcnew System::Windows::Forms::Button());
 			this->Options = (gcnew System::Windows::Forms::Button());
@@ -192,6 +190,8 @@ private: System::Windows::Forms::Label^ Display;
 			this->Potato = (gcnew System::Windows::Forms::Button());
 			this->Popcorn = (gcnew System::Windows::Forms::Button());
 			this->Vent = (gcnew System::Windows::Forms::Button());
+			this->Display = (gcnew System::Windows::Forms::Label());
+			this->DisplayBox = (gcnew System::Windows::Forms::Button());
 			this->panel1->SuspendLayout();
 			this->panel3->SuspendLayout();
 			this->panel2->SuspendLayout();
@@ -256,18 +256,6 @@ private: System::Windows::Forms::Label^ Display;
 			this->panel1->Size = System::Drawing::Size(2047, 176);
 			this->panel1->TabIndex = 2;
 			// 
-			// Display
-			// 
-			this->Display->AutoSize = true;
-			this->Display->BackColor = System::Drawing::Color::Gainsboro;
-			this->Display->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.125F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->Display->Location = System::Drawing::Point(1937, 497);
-			this->Display->Name = L"Display";
-			this->Display->Size = System::Drawing::Size(160, 48);
-			this->Display->TabIndex = 24;
-			this->Display->Text = L"Hey Hot Stuff!\nI\'m Mr. Waves ;)";
-			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
@@ -279,14 +267,6 @@ private: System::Windows::Forms::Label^ Display;
 			this->label2->Size = System::Drawing::Size(47, 20);
 			this->label2->TabIndex = 23;
 			this->label2->Text = L"3 sec";
-			// 
-			// DisplayBox
-			// 
-			this->DisplayBox->Location = System::Drawing::Point(1872, 385);
-			this->DisplayBox->Name = L"DisplayBox";
-			this->DisplayBox->Size = System::Drawing::Size(281, 293);
-			this->DisplayBox->TabIndex = 3;
-			this->DisplayBox->UseVisualStyleBackColor = true;
 			// 
 			// StopClear
 			// 
@@ -367,6 +347,7 @@ private: System::Windows::Forms::Label^ Display;
 			this->EcoMode->TabIndex = 16;
 			this->EcoMode->Text = L"Eco\nMode";
 			this->EcoMode->UseVisualStyleBackColor = false;
+			this->EcoMode->Click += gcnew System::EventHandler(this, &MyForm::EcoMode_Click);
 			// 
 			// KitchenTimer
 			// 
@@ -798,6 +779,26 @@ private: System::Windows::Forms::Label^ Display;
 			this->Vent->Text = L"Vent";
 			this->Vent->UseVisualStyleBackColor = false;
 			// 
+			// Display
+			// 
+			this->Display->AutoSize = true;
+			this->Display->BackColor = System::Drawing::Color::Gainsboro;
+			this->Display->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.125F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->Display->Location = System::Drawing::Point(1937, 497);
+			this->Display->Name = L"Display";
+			this->Display->Size = System::Drawing::Size(160, 48);
+			this->Display->TabIndex = 24;
+			this->Display->Text = L"Hey Hot Stuff!\nI\'m Mr. Waves ;)";
+			// 
+			// DisplayBox
+			// 
+			this->DisplayBox->Location = System::Drawing::Point(1872, 385);
+			this->DisplayBox->Name = L"DisplayBox";
+			this->DisplayBox->Size = System::Drawing::Size(281, 293);
+			this->DisplayBox->TabIndex = 3;
+			this->DisplayBox->UseVisualStyleBackColor = true;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
@@ -830,8 +831,17 @@ private: System::Windows::Forms::Label^ Display;
 	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void Turntable_Click(System::Object^ sender, System::EventArgs^ e) {
-		Display->Text = "Turntable ON";
-		
+		static bool isOn = true;
+		if (isOn == false)
+		{
+			Display->Text = "Turntable OFF";
+		}
+		else
+		{
+			Display->Text = "Turntable ON";
+		}
+		isOn = !isOn;
+		//if else / turnery statements
 	}
 	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
@@ -866,5 +876,18 @@ private: System::Void Veggies_Click(System::Object^ sender, System::EventArgs^ e
 	Display->Text = "Veggin' out\nwith my cucumber out";
 }
 
+private: System::Void EcoMode_Click(System::Object^ sender, System::EventArgs^ e) {
+	static bool isOn = true;
+	if (isOn == false)
+	{
+		Display->Text = "EcoMode OFF";
+	}
+	else
+	{
+		Display->Text = "EcoMode ON";
+	}
+	isOn = !isOn;
+
+}
 };
 }
