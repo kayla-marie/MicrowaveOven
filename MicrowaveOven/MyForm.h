@@ -342,7 +342,7 @@ private: System::Windows::Forms::Label^ Display;
 				static_cast<System::Byte>(0)));
 			this->EcoMode->Location = System::Drawing::Point(1861, 22);
 			this->EcoMode->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->EcoMode->Name = L"EcoMode";
+			//this->EcoMode->Name = L"EcoMode";
 			this->EcoMode->Size = System::Drawing::Size(80, 60);
 			this->EcoMode->TabIndex = 16;
 			this->EcoMode->Text = L"Eco\nMode";
