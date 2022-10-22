@@ -1,3 +1,4 @@
+#include <chrono>
 #pragma once
 
 namespace MicrowaveOven {
@@ -227,9 +228,7 @@ private: System::Windows::Forms::Label^ Display;
 			// panel1
 			// 
 			this->panel1->BackColor = System::Drawing::Color::Transparent;
-			this->panel1->Controls->Add(this->Display);
 			this->panel1->Controls->Add(this->label2);
-			this->panel1->Controls->Add(this->DisplayBox);
 			this->panel1->Controls->Add(this->StopClear);
 			this->panel1->Controls->Add(this->Increase30Sec);
 			this->panel1->Controls->Add(this->Options);
@@ -263,7 +262,7 @@ private: System::Windows::Forms::Label^ Display;
 			this->Display->BackColor = System::Drawing::Color::Gainsboro;
 			this->Display->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.125F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Display->Location = System::Drawing::Point(941, 45);
+			this->Display->Location = System::Drawing::Point(1937, 497);
 			this->Display->Name = L"Display";
 			this->Display->Size = System::Drawing::Size(160, 48);
 			this->Display->TabIndex = 24;
@@ -283,9 +282,9 @@ private: System::Windows::Forms::Label^ Display;
 			// 
 			// DisplayBox
 			// 
-			this->DisplayBox->Location = System::Drawing::Point(931, 34);
+			this->DisplayBox->Location = System::Drawing::Point(1872, 385);
 			this->DisplayBox->Name = L"DisplayBox";
-			this->DisplayBox->Size = System::Drawing::Size(281, 96);
+			this->DisplayBox->Size = System::Drawing::Size(281, 293);
 			this->DisplayBox->TabIndex = 3;
 			this->DisplayBox->UseVisualStyleBackColor = true;
 			// 
@@ -807,7 +806,9 @@ private: System::Windows::Forms::Label^ Display;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->ClientSize = System::Drawing::Size(2507, 1175);
+			this->Controls->Add(this->Display);
 			this->Controls->Add(this->panel1);
+			this->Controls->Add(this->DisplayBox);
 			this->DoubleBuffered = true;
 			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->Name = L"MyForm";
@@ -819,6 +820,7 @@ private: System::Windows::Forms::Label^ Display;
 			this->panel2->ResumeLayout(false);
 			this->panel2->PerformLayout();
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -861,7 +863,8 @@ private: System::Void Stop_Click(System::Object^ sender, System::EventArgs^ e) {
 	Display->Text = "Oh do behave";
 }
 private: System::Void Veggies_Click(System::Object^ sender, System::EventArgs^ e) {
-	Display->Text = "Veggin' out'\nwith my cucumber out";
+	Display->Text = "Veggin' out\nwith my cucumber out";
 }
+
 };
 }
