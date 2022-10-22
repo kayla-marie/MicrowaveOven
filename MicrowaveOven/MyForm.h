@@ -1,9 +1,7 @@
 #include <chrono>
 #pragma once
 
-
 namespace MicrowaveOven {
-
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -16,12 +14,6 @@ namespace MicrowaveOven {
 	/// </summary>
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
-		//Timer member value
-			static int Second = 0;
-			static int Minute = 0;
-			static String^ Sec;
-			static String^ Min;
-
 	public:
 		MyForm(void)
 		{
@@ -126,8 +118,12 @@ namespace MicrowaveOven {
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Label^ label3;
 
-private: System::Windows::Forms::Button^ DisplayBox;
-private: System::Windows::Forms::Label^ Display;
+	private: System::Windows::Forms::Button^ DisplayBox;
+	private: System::Windows::Forms::Label^ Display;
+	private: System::Windows::Forms::Button^ PowerLevel;
+	private: System::Windows::Forms::Button^ Sound;
+	private: System::Windows::Forms::Timer^ Timer;
+	private: System::ComponentModel::IContainer^ components;
 
 
 
@@ -145,19 +141,22 @@ private: System::Windows::Forms::Label^ Display;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
+			/// <summary>
+			/// Required method for Designer support - do not modify
+			/// the contents of this method with the code editor.
+			/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
 			this->Turntable = (gcnew System::Windows::Forms::Button());
 			this->Light = (gcnew System::Windows::Forms::Button());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->PowerLevel = (gcnew System::Windows::Forms::Button());
+			this->Sound = (gcnew System::Windows::Forms::Button());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->StopClear = (gcnew System::Windows::Forms::Button());
 			this->Increase30Sec = (gcnew System::Windows::Forms::Button());
@@ -199,6 +198,7 @@ private: System::Windows::Forms::Label^ Display;
 			this->Vent = (gcnew System::Windows::Forms::Button());
 			this->Display = (gcnew System::Windows::Forms::Label());
 			this->DisplayBox = (gcnew System::Windows::Forms::Button());
+			this->Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->panel1->SuspendLayout();
 			this->panel3->SuspendLayout();
 			this->panel2->SuspendLayout();
@@ -210,10 +210,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->Turntable->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Turntable->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->Turntable->Location = System::Drawing::Point(2, 6);
-			this->Turntable->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->Turntable->Location = System::Drawing::Point(4, 12);
+			this->Turntable->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Turntable->Name = L"Turntable";
-			this->Turntable->Size = System::Drawing::Size(74, 30);
+			this->Turntable->Size = System::Drawing::Size(148, 58);
 			this->Turntable->TabIndex = 0;
 			this->Turntable->Text = L"Turntable \nOn/Off";
 			this->Turntable->UseVisualStyleBackColor = false;
@@ -224,10 +224,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->Light->BackColor = System::Drawing::Color::Transparent;
 			this->Light->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Light->Location = System::Drawing::Point(2, 51);
-			this->Light->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->Light->Location = System::Drawing::Point(4, 98);
+			this->Light->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Light->Name = L"Light";
-			this->Light->Size = System::Drawing::Size(38, 17);
+			this->Light->Size = System::Drawing::Size(76, 33);
 			this->Light->TabIndex = 1;
 			this->Light->Text = L"Light";
 			this->Light->UseVisualStyleBackColor = false;
@@ -236,6 +236,8 @@ private: System::Windows::Forms::Label^ Display;
 			// panel1
 			// 
 			this->panel1->BackColor = System::Drawing::Color::Transparent;
+			this->panel1->Controls->Add(this->PowerLevel);
+			this->panel1->Controls->Add(this->Sound);
 			this->panel1->Controls->Add(this->label2);
 			this->panel1->Controls->Add(this->StopClear);
 			this->panel1->Controls->Add(this->Increase30Sec);
@@ -258,11 +260,35 @@ private: System::Windows::Forms::Label^ Display;
 			this->panel1->Controls->Add(this->Vent);
 			this->panel1->Controls->Add(this->Turntable);
 			this->panel1->Controls->Add(this->Light);
-			this->panel1->Location = System::Drawing::Point(66, 394);
-			this->panel1->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->panel1->Location = System::Drawing::Point(132, 758);
+			this->panel1->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(1024, 92);
+			this->panel1->Size = System::Drawing::Size(2048, 177);
 			this->panel1->TabIndex = 2;
+			// 
+			// PowerLevel
+			// 
+			this->PowerLevel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.125F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->PowerLevel->Location = System::Drawing::Point(953, 88);
+			this->PowerLevel->Name = L"PowerLevel";
+			this->PowerLevel->Size = System::Drawing::Size(148, 56);
+			this->PowerLevel->TabIndex = 25;
+			this->PowerLevel->Text = L"PowerLevel";
+			this->PowerLevel->UseVisualStyleBackColor = true;
+			this->PowerLevel->Click += gcnew System::EventHandler(this, &MyForm::PowerLevel_Click);
+			// 
+			// Sound
+			// 
+			this->Sound->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.125F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->Sound->Location = System::Drawing::Point(952, 18);
+			this->Sound->Name = L"Sound";
+			this->Sound->Size = System::Drawing::Size(120, 58);
+			this->Sound->TabIndex = 24;
+			this->Sound->Text = L"Sound";
+			this->Sound->UseVisualStyleBackColor = true;
+			this->Sound->Click += gcnew System::EventHandler(this, &MyForm::Sound_Click);
 			// 
 			// label2
 			// 
@@ -270,10 +296,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->label2->BackColor = System::Drawing::Color::Transparent;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6));
 			this->label2->ForeColor = System::Drawing::SystemColors::Control;
-			this->label2->Location = System::Drawing::Point(986, 34);
-			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label2->Location = System::Drawing::Point(1972, 65);
+			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(23, 9);
+			this->label2->Size = System::Drawing::Size(47, 20);
 			this->label2->TabIndex = 23;
 			this->label2->Text = L"3 sec";
 			// 
@@ -282,50 +308,52 @@ private: System::Windows::Forms::Label^ Display;
 			this->StopClear->BackColor = System::Drawing::Color::Transparent;
 			this->StopClear->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->StopClear->Location = System::Drawing::Point(976, 44);
-			this->StopClear->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->StopClear->Location = System::Drawing::Point(1952, 85);
+			this->StopClear->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->StopClear->Name = L"StopClear";
-			this->StopClear->Size = System::Drawing::Size(46, 31);
+			this->StopClear->Size = System::Drawing::Size(92, 60);
 			this->StopClear->TabIndex = 22;
 			this->StopClear->Text = L"STOP CLEAR";
 			this->StopClear->UseVisualStyleBackColor = false;
-			this->StopClear->Click += gcnew System::EventHandler(this, &MyForm::Stop_Click);
+			this->StopClear->Click += gcnew System::EventHandler(this, &MyForm::StopClear_Click);
 			// 
 			// Increase30Sec
 			// 
 			this->Increase30Sec->BackColor = System::Drawing::Color::Transparent;
 			this->Increase30Sec->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Increase30Sec->Location = System::Drawing::Point(930, 46);
-			this->Increase30Sec->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->Increase30Sec->Location = System::Drawing::Point(1860, 88);
+			this->Increase30Sec->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Increase30Sec->Name = L"Increase30Sec";
-			this->Increase30Sec->Size = System::Drawing::Size(40, 29);
+			this->Increase30Sec->Size = System::Drawing::Size(80, 56);
 			this->Increase30Sec->TabIndex = 21;
 			this->Increase30Sec->Text = L"+30 sec";
 			this->Increase30Sec->UseVisualStyleBackColor = false;
+			this->Increase30Sec->Click += gcnew System::EventHandler(this, &MyForm::Increase30Sec_Click);
 			// 
 			// Options
 			// 
 			this->Options->BackColor = System::Drawing::Color::Transparent;
 			this->Options->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Options->Location = System::Drawing::Point(870, 46);
-			this->Options->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->Options->Location = System::Drawing::Point(1740, 88);
+			this->Options->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Options->Name = L"Options";
-			this->Options->Size = System::Drawing::Size(51, 29);
+			this->Options->Size = System::Drawing::Size(102, 56);
 			this->Options->TabIndex = 20;
 			this->Options->Text = L"Options";
 			this->Options->UseVisualStyleBackColor = false;
+			this->Options->Click += gcnew System::EventHandler(this, &MyForm::Options_Click);
 			// 
 			// KeepWarm
 			// 
 			this->KeepWarm->BackColor = System::Drawing::Color::Transparent;
 			this->KeepWarm->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->KeepWarm->Location = System::Drawing::Point(822, 44);
-			this->KeepWarm->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->KeepWarm->Location = System::Drawing::Point(1644, 85);
+			this->KeepWarm->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->KeepWarm->Name = L"KeepWarm";
-			this->KeepWarm->Size = System::Drawing::Size(42, 31);
+			this->KeepWarm->Size = System::Drawing::Size(84, 60);
 			this->KeepWarm->TabIndex = 19;
 			this->KeepWarm->Text = L"Keep Warm";
 			this->KeepWarm->UseVisualStyleBackColor = false;
@@ -336,23 +364,24 @@ private: System::Windows::Forms::Label^ Display;
 			this->Start->BackColor = System::Drawing::Color::Transparent;
 			this->Start->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Start->Location = System::Drawing::Point(976, 11);
-			this->Start->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->Start->Location = System::Drawing::Point(1952, 21);
+			this->Start->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Start->Name = L"Start";
-			this->Start->Size = System::Drawing::Size(46, 26);
+			this->Start->Size = System::Drawing::Size(92, 50);
 			this->Start->TabIndex = 17;
 			this->Start->Text = L"START";
 			this->Start->UseVisualStyleBackColor = false;
+			this->Start->Click += gcnew System::EventHandler(this, &MyForm::Start_Click);
 			// 
 			// EcoMode
 			// 
 			this->EcoMode->BackColor = System::Drawing::Color::Transparent;
 			this->EcoMode->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->EcoMode->Location = System::Drawing::Point(930, 11);
-			this->EcoMode->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->EcoMode->Location = System::Drawing::Point(1860, 21);
+			this->EcoMode->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->EcoMode->Name = L"EcoMode";
-			this->EcoMode->Size = System::Drawing::Size(40, 31);
+			this->EcoMode->Size = System::Drawing::Size(80, 60);
 			this->EcoMode->TabIndex = 16;
 			this->EcoMode->Text = L"Eco\nMode";
 			this->EcoMode->UseVisualStyleBackColor = false;
@@ -363,10 +392,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->KitchenTimer->BackColor = System::Drawing::Color::Transparent;
 			this->KitchenTimer->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->KitchenTimer->Location = System::Drawing::Point(870, 9);
-			this->KitchenTimer->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->KitchenTimer->Location = System::Drawing::Point(1740, 17);
+			this->KitchenTimer->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->KitchenTimer->Name = L"KitchenTimer";
-			this->KitchenTimer->Size = System::Drawing::Size(51, 32);
+			this->KitchenTimer->Size = System::Drawing::Size(102, 62);
 			this->KitchenTimer->TabIndex = 15;
 			this->KitchenTimer->Text = L"Kitchen\nTimer";
 			this->KitchenTimer->UseVisualStyleBackColor = false;
@@ -377,13 +406,14 @@ private: System::Windows::Forms::Label^ Display;
 			this->OK->BackColor = System::Drawing::Color::Transparent;
 			this->OK->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->OK->Location = System::Drawing::Point(822, 11);
-			this->OK->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->OK->Location = System::Drawing::Point(1644, 21);
+			this->OK->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->OK->Name = L"OK";
-			this->OK->Size = System::Drawing::Size(38, 29);
+			this->OK->Size = System::Drawing::Size(76, 56);
 			this->OK->TabIndex = 14;
 			this->OK->Text = L"OK";
 			this->OK->UseVisualStyleBackColor = false;
+			this->OK->Click += gcnew System::EventHandler(this, &MyForm::OK_Click);
 			// 
 			// panel3
 			// 
@@ -397,10 +427,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->panel3->Controls->Add(this->keyID3);
 			this->panel3->Controls->Add(this->keyID2);
 			this->panel3->Controls->Add(this->keyID1);
-			this->panel3->Location = System::Drawing::Point(638, 11);
-			this->panel3->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->panel3->Location = System::Drawing::Point(1276, 21);
+			this->panel3->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->panel3->Name = L"panel3";
-			this->panel3->Size = System::Drawing::Size(178, 62);
+			this->panel3->Size = System::Drawing::Size(356, 119);
 			this->panel3->TabIndex = 13;
 			// 
 			// keyID0
@@ -408,10 +438,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->keyID0->BackColor = System::Drawing::Color::Transparent;
 			this->keyID0->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->keyID0->Location = System::Drawing::Point(142, 34);
-			this->keyID0->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->keyID0->Location = System::Drawing::Point(284, 65);
+			this->keyID0->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->keyID0->Name = L"keyID0";
-			this->keyID0->Size = System::Drawing::Size(30, 20);
+			this->keyID0->Size = System::Drawing::Size(60, 38);
 			this->keyID0->TabIndex = 9;
 			this->keyID0->Text = L"0";
 			this->keyID0->UseVisualStyleBackColor = false;
@@ -421,10 +451,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->keyID9->BackColor = System::Drawing::Color::Transparent;
 			this->keyID9->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->keyID9->Location = System::Drawing::Point(108, 34);
-			this->keyID9->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->keyID9->Location = System::Drawing::Point(216, 65);
+			this->keyID9->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->keyID9->Name = L"keyID9";
-			this->keyID9->Size = System::Drawing::Size(30, 20);
+			this->keyID9->Size = System::Drawing::Size(60, 38);
 			this->keyID9->TabIndex = 8;
 			this->keyID9->Text = L"9";
 			this->keyID9->UseVisualStyleBackColor = false;
@@ -434,10 +464,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->keyID8->BackColor = System::Drawing::Color::Transparent;
 			this->keyID8->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->keyID8->Location = System::Drawing::Point(74, 34);
-			this->keyID8->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->keyID8->Location = System::Drawing::Point(148, 65);
+			this->keyID8->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->keyID8->Name = L"keyID8";
-			this->keyID8->Size = System::Drawing::Size(30, 20);
+			this->keyID8->Size = System::Drawing::Size(60, 38);
 			this->keyID8->TabIndex = 7;
 			this->keyID8->Text = L"8";
 			this->keyID8->UseVisualStyleBackColor = false;
@@ -447,10 +477,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->keyID7->BackColor = System::Drawing::Color::Transparent;
 			this->keyID7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->keyID7->Location = System::Drawing::Point(36, 34);
-			this->keyID7->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->keyID7->Location = System::Drawing::Point(72, 65);
+			this->keyID7->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->keyID7->Name = L"keyID7";
-			this->keyID7->Size = System::Drawing::Size(30, 20);
+			this->keyID7->Size = System::Drawing::Size(60, 38);
 			this->keyID7->TabIndex = 6;
 			this->keyID7->Text = L"7";
 			this->keyID7->UseVisualStyleBackColor = false;
@@ -460,10 +490,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->keyID6->BackColor = System::Drawing::Color::Transparent;
 			this->keyID6->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->keyID6->Location = System::Drawing::Point(2, 34);
-			this->keyID6->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->keyID6->Location = System::Drawing::Point(4, 65);
+			this->keyID6->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->keyID6->Name = L"keyID6";
-			this->keyID6->Size = System::Drawing::Size(30, 20);
+			this->keyID6->Size = System::Drawing::Size(60, 38);
 			this->keyID6->TabIndex = 5;
 			this->keyID6->Text = L"6";
 			this->keyID6->UseVisualStyleBackColor = false;
@@ -473,10 +503,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->keyID5->BackColor = System::Drawing::Color::Transparent;
 			this->keyID5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->keyID5->Location = System::Drawing::Point(142, 7);
-			this->keyID5->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->keyID5->Location = System::Drawing::Point(284, 13);
+			this->keyID5->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->keyID5->Name = L"keyID5";
-			this->keyID5->Size = System::Drawing::Size(30, 20);
+			this->keyID5->Size = System::Drawing::Size(60, 38);
 			this->keyID5->TabIndex = 4;
 			this->keyID5->Text = L"5";
 			this->keyID5->UseVisualStyleBackColor = false;
@@ -486,10 +516,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->keyID4->BackColor = System::Drawing::Color::Transparent;
 			this->keyID4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->keyID4->Location = System::Drawing::Point(108, 6);
-			this->keyID4->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->keyID4->Location = System::Drawing::Point(216, 12);
+			this->keyID4->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->keyID4->Name = L"keyID4";
-			this->keyID4->Size = System::Drawing::Size(30, 20);
+			this->keyID4->Size = System::Drawing::Size(60, 38);
 			this->keyID4->TabIndex = 3;
 			this->keyID4->Text = L"4";
 			this->keyID4->UseVisualStyleBackColor = false;
@@ -499,10 +529,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->keyID3->BackColor = System::Drawing::Color::Transparent;
 			this->keyID3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->keyID3->Location = System::Drawing::Point(74, 6);
-			this->keyID3->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->keyID3->Location = System::Drawing::Point(148, 12);
+			this->keyID3->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->keyID3->Name = L"keyID3";
-			this->keyID3->Size = System::Drawing::Size(30, 20);
+			this->keyID3->Size = System::Drawing::Size(60, 38);
 			this->keyID3->TabIndex = 2;
 			this->keyID3->Text = L"3";
 			this->keyID3->UseVisualStyleBackColor = false;
@@ -512,10 +542,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->keyID2->BackColor = System::Drawing::Color::Transparent;
 			this->keyID2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->keyID2->Location = System::Drawing::Point(36, 6);
-			this->keyID2->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->keyID2->Location = System::Drawing::Point(72, 12);
+			this->keyID2->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->keyID2->Name = L"keyID2";
-			this->keyID2->Size = System::Drawing::Size(30, 20);
+			this->keyID2->Size = System::Drawing::Size(60, 38);
 			this->keyID2->TabIndex = 1;
 			this->keyID2->Text = L"2";
 			this->keyID2->UseVisualStyleBackColor = false;
@@ -525,10 +555,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->keyID1->BackColor = System::Drawing::Color::Transparent;
 			this->keyID1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->keyID1->Location = System::Drawing::Point(2, 6);
-			this->keyID1->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->keyID1->Location = System::Drawing::Point(4, 12);
+			this->keyID1->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->keyID1->Name = L"keyID1";
-			this->keyID1->Size = System::Drawing::Size(30, 20);
+			this->keyID1->Size = System::Drawing::Size(60, 38);
 			this->keyID1->TabIndex = 0;
 			this->keyID1->Text = L"1";
 			this->keyID1->UseVisualStyleBackColor = false;
@@ -538,104 +568,112 @@ private: System::Windows::Forms::Label^ Display;
 			this->Decrease10Sec->BackColor = System::Drawing::Color::Transparent;
 			this->Decrease10Sec->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Decrease10Sec->Location = System::Drawing::Point(612, 40);
-			this->Decrease10Sec->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->Decrease10Sec->Location = System::Drawing::Point(1224, 77);
+			this->Decrease10Sec->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Decrease10Sec->Name = L"Decrease10Sec";
-			this->Decrease10Sec->Size = System::Drawing::Size(22, 25);
+			this->Decrease10Sec->Size = System::Drawing::Size(44, 48);
 			this->Decrease10Sec->TabIndex = 12;
 			this->Decrease10Sec->Text = L"v";
 			this->Decrease10Sec->UseVisualStyleBackColor = false;
+			this->Decrease10Sec->Click += gcnew System::EventHandler(this, &MyForm::Decrease10Sec_Click);
 			// 
 			// Increase10Sec
 			// 
 			this->Increase10Sec->BackColor = System::Drawing::Color::Transparent;
 			this->Increase10Sec->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.875F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Increase10Sec->Location = System::Drawing::Point(612, 16);
-			this->Increase10Sec->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->Increase10Sec->Location = System::Drawing::Point(1224, 31);
+			this->Increase10Sec->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Increase10Sec->Name = L"Increase10Sec";
-			this->Increase10Sec->Size = System::Drawing::Size(22, 25);
+			this->Increase10Sec->Size = System::Drawing::Size(44, 48);
 			this->Increase10Sec->TabIndex = 11;
 			this->Increase10Sec->Text = L"^";
 			this->Increase10Sec->UseVisualStyleBackColor = false;
+			this->Increase10Sec->Click += gcnew System::EventHandler(this, &MyForm::Increase10Sec_Click);
 			// 
 			// PowerGrillAuto
 			// 
 			this->PowerGrillAuto->BackColor = System::Drawing::Color::Transparent;
 			this->PowerGrillAuto->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->PowerGrillAuto->Location = System::Drawing::Point(402, 44);
-			this->PowerGrillAuto->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->PowerGrillAuto->Location = System::Drawing::Point(804, 85);
+			this->PowerGrillAuto->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->PowerGrillAuto->Name = L"PowerGrillAuto";
-			this->PowerGrillAuto->Size = System::Drawing::Size(58, 30);
+			this->PowerGrillAuto->Size = System::Drawing::Size(116, 58);
 			this->PowerGrillAuto->TabIndex = 9;
 			this->PowerGrillAuto->Text = L"Power\nGrillAuto";
 			this->PowerGrillAuto->UseVisualStyleBackColor = false;
+			this->PowerGrillAuto->Click += gcnew System::EventHandler(this, &MyForm::PowerGrillAuto_Click);
 			// 
 			// PoundDefrost
 			// 
 			this->PoundDefrost->BackColor = System::Drawing::Color::Transparent;
 			this->PoundDefrost->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->PoundDefrost->Location = System::Drawing::Point(334, 44);
-			this->PoundDefrost->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->PoundDefrost->Location = System::Drawing::Point(668, 85);
+			this->PoundDefrost->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->PoundDefrost->Name = L"PoundDefrost";
-			this->PoundDefrost->Size = System::Drawing::Size(59, 31);
+			this->PoundDefrost->Size = System::Drawing::Size(118, 60);
 			this->PoundDefrost->TabIndex = 8;
 			this->PoundDefrost->Text = L"1 Pound \nDefrost";
 			this->PoundDefrost->UseVisualStyleBackColor = false;
+			this->PoundDefrost->Click += gcnew System::EventHandler(this, &MyForm::PoundDefrost_Click);
 			// 
 			// AutoDefrost
 			// 
 			this->AutoDefrost->BackColor = System::Drawing::Color::Transparent;
 			this->AutoDefrost->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->AutoDefrost->Location = System::Drawing::Point(264, 44);
-			this->AutoDefrost->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->AutoDefrost->Location = System::Drawing::Point(528, 85);
+			this->AutoDefrost->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->AutoDefrost->Name = L"AutoDefrost";
-			this->AutoDefrost->Size = System::Drawing::Size(58, 31);
+			this->AutoDefrost->Size = System::Drawing::Size(116, 60);
 			this->AutoDefrost->TabIndex = 7;
 			this->AutoDefrost->Text = L"Auto \nDefrost";
 			this->AutoDefrost->UseVisualStyleBackColor = false;
+			this->AutoDefrost->Click += gcnew System::EventHandler(this, &MyForm::AutoDefrost_Click);
 			// 
 			// GrillMicrowave
 			// 
 			this->GrillMicrowave->BackColor = System::Drawing::Color::Transparent;
 			this->GrillMicrowave->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->GrillMicrowave->Location = System::Drawing::Point(396, 9);
-			this->GrillMicrowave->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->GrillMicrowave->Location = System::Drawing::Point(792, 17);
+			this->GrillMicrowave->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->GrillMicrowave->Name = L"GrillMicrowave";
-			this->GrillMicrowave->Size = System::Drawing::Size(64, 29);
+			this->GrillMicrowave->Size = System::Drawing::Size(128, 56);
 			this->GrillMicrowave->TabIndex = 6;
 			this->GrillMicrowave->Text = L"Grill + \nMicrowave";
 			this->GrillMicrowave->UseVisualStyleBackColor = false;
+			this->GrillMicrowave->Click += gcnew System::EventHandler(this, &MyForm::GrillMicrowave_Click);
 			// 
 			// PowerGrill
 			// 
 			this->PowerGrill->BackColor = System::Drawing::Color::Transparent;
 			this->PowerGrill->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->PowerGrill->Location = System::Drawing::Point(334, 11);
-			this->PowerGrill->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->PowerGrill->Location = System::Drawing::Point(668, 21);
+			this->PowerGrill->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->PowerGrill->Name = L"PowerGrill";
-			this->PowerGrill->Size = System::Drawing::Size(59, 20);
+			this->PowerGrill->Size = System::Drawing::Size(118, 38);
 			this->PowerGrill->TabIndex = 5;
 			this->PowerGrill->Text = L"PowerGrill";
 			this->PowerGrill->UseVisualStyleBackColor = false;
+			this->PowerGrill->Click += gcnew System::EventHandler(this, &MyForm::PowerGrill_Click);
 			// 
 			// Microwave
 			// 
 			this->Microwave->BackColor = System::Drawing::Color::Transparent;
 			this->Microwave->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Microwave->Location = System::Drawing::Point(264, 10);
-			this->Microwave->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->Microwave->Location = System::Drawing::Point(528, 19);
+			this->Microwave->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Microwave->Name = L"Microwave";
-			this->Microwave->Size = System::Drawing::Size(66, 21);
+			this->Microwave->Size = System::Drawing::Size(132, 40);
 			this->Microwave->TabIndex = 4;
 			this->Microwave->Text = L"Microwave";
 			this->Microwave->UseVisualStyleBackColor = false;
+			this->Microwave->Click += gcnew System::EventHandler(this, &MyForm::Microwave_Click);
 			// 
 			// panel2
 			// 
@@ -649,10 +687,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->panel2->Controls->Add(this->Potato);
 			this->panel2->Controls->Add(this->Popcorn);
 			this->panel2->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->panel2->Location = System::Drawing::Point(80, 1);
-			this->panel2->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->panel2->Location = System::Drawing::Point(160, 2);
+			this->panel2->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(178, 73);
+			this->panel2->Size = System::Drawing::Size(356, 140);
 			this->panel2->TabIndex = 3;
 			// 
 			// label4
@@ -660,10 +698,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->label4->AutoSize = true;
 			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6));
 			this->label4->ForeColor = System::Drawing::SystemColors::Control;
-			this->label4->Location = System::Drawing::Point(110, 31);
-			this->label4->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label4->Location = System::Drawing::Point(220, 60);
+			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(57, 9);
+			this->label4->Size = System::Drawing::Size(126, 20);
 			this->label4->TabIndex = 25;
 			this->label4->Text = L"_____________";
 			// 
@@ -674,13 +712,12 @@ private: System::Windows::Forms::Label^ Display;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label1->ForeColor = System::Drawing::SystemColors::Control;
-			this->label1->Location = System::Drawing::Point(62, 32);
-			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label1->Location = System::Drawing::Point(124, 62);
+			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(49, 9);
+			this->label1->Size = System::Drawing::Size(101, 20);
 			this->label1->TabIndex = 6;
 			this->label1->Text = L"Sensor Cook";
-			this->label1->Click += gcnew System::EventHandler(this, &MyForm::label1_Click);
 			// 
 			// label3
 			// 
@@ -689,10 +726,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label3->ForeColor = System::Drawing::SystemColors::Control;
-			this->label3->Location = System::Drawing::Point(2, 31);
-			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label3->Location = System::Drawing::Point(4, 60);
+			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(61, 9);
+			this->label3->Size = System::Drawing::Size(135, 20);
 			this->label3->TabIndex = 24;
 			this->label3->Text = L"______________";
 			// 
@@ -701,10 +738,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->Veggies->BackColor = System::Drawing::Color::Transparent;
 			this->Veggies->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Veggies->Location = System::Drawing::Point(118, 49);
-			this->Veggies->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->Veggies->Location = System::Drawing::Point(236, 94);
+			this->Veggies->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Veggies->Name = L"Veggies";
-			this->Veggies->Size = System::Drawing::Size(56, 17);
+			this->Veggies->Size = System::Drawing::Size(112, 33);
 			this->Veggies->TabIndex = 5;
 			this->Veggies->Text = L"Veggies";
 			this->Veggies->UseVisualStyleBackColor = false;
@@ -715,10 +752,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->Reheat->BackColor = System::Drawing::Color::Transparent;
 			this->Reheat->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Reheat->Location = System::Drawing::Point(60, 49);
-			this->Reheat->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->Reheat->Location = System::Drawing::Point(120, 94);
+			this->Reheat->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Reheat->Name = L"Reheat";
-			this->Reheat->Size = System::Drawing::Size(56, 17);
+			this->Reheat->Size = System::Drawing::Size(112, 33);
 			this->Reheat->TabIndex = 4;
 			this->Reheat->Text = L"Reheat";
 			this->Reheat->UseVisualStyleBackColor = false;
@@ -729,10 +766,10 @@ private: System::Windows::Forms::Label^ Display;
 			this->Cook->BackColor = System::Drawing::Color::Transparent;
 			this->Cook->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Cook->Location = System::Drawing::Point(2, 48);
-			this->Cook->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->Cook->Location = System::Drawing::Point(4, 92);
+			this->Cook->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Cook->Name = L"Cook";
-			this->Cook->Size = System::Drawing::Size(56, 17);
+			this->Cook->Size = System::Drawing::Size(112, 33);
 			this->Cook->TabIndex = 3;
 			this->Cook->Text = L"Cook";
 			this->Cook->UseVisualStyleBackColor = false;
@@ -743,36 +780,38 @@ private: System::Windows::Forms::Label^ Display;
 			this->Pizza->BackColor = System::Drawing::Color::Transparent;
 			this->Pizza->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Pizza->Location = System::Drawing::Point(118, 9);
-			this->Pizza->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->Pizza->Location = System::Drawing::Point(236, 17);
+			this->Pizza->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Pizza->Name = L"Pizza";
-			this->Pizza->Size = System::Drawing::Size(56, 17);
+			this->Pizza->Size = System::Drawing::Size(112, 33);
 			this->Pizza->TabIndex = 2;
 			this->Pizza->Text = L"Pizza";
 			this->Pizza->UseVisualStyleBackColor = false;
+			this->Pizza->Click += gcnew System::EventHandler(this, &MyForm::Pizza_Click);
 			// 
 			// Potato
 			// 
 			this->Potato->BackColor = System::Drawing::Color::Transparent;
 			this->Potato->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Potato->Location = System::Drawing::Point(60, 9);
-			this->Potato->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->Potato->Location = System::Drawing::Point(120, 17);
+			this->Potato->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Potato->Name = L"Potato";
-			this->Potato->Size = System::Drawing::Size(56, 17);
+			this->Potato->Size = System::Drawing::Size(112, 33);
 			this->Potato->TabIndex = 1;
 			this->Potato->Text = L"Potato";
 			this->Potato->UseVisualStyleBackColor = false;
+			this->Potato->Click += gcnew System::EventHandler(this, &MyForm::Potato_Click);
 			// 
 			// Popcorn
 			// 
 			this->Popcorn->BackColor = System::Drawing::Color::Transparent;
 			this->Popcorn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Popcorn->Location = System::Drawing::Point(2, 9);
-			this->Popcorn->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->Popcorn->Location = System::Drawing::Point(4, 17);
+			this->Popcorn->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Popcorn->Name = L"Popcorn";
-			this->Popcorn->Size = System::Drawing::Size(56, 17);
+			this->Popcorn->Size = System::Drawing::Size(112, 33);
 			this->Popcorn->TabIndex = 0;
 			this->Popcorn->Text = L"Popcorn";
 			this->Popcorn->UseVisualStyleBackColor = false;
@@ -783,13 +822,14 @@ private: System::Windows::Forms::Label^ Display;
 			this->Vent->BackColor = System::Drawing::Color::Transparent;
 			this->Vent->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Vent->Location = System::Drawing::Point(42, 51);
-			this->Vent->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->Vent->Location = System::Drawing::Point(84, 98);
+			this->Vent->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Vent->Name = L"Vent";
-			this->Vent->Size = System::Drawing::Size(34, 17);
+			this->Vent->Size = System::Drawing::Size(68, 33);
 			this->Vent->TabIndex = 2;
 			this->Vent->Text = L"Vent";
 			this->Vent->UseVisualStyleBackColor = false;
+			this->Vent->Click += gcnew System::EventHandler(this, &MyForm::Vent_Click);
 			// 
 			// Display
 			// 
@@ -797,38 +837,37 @@ private: System::Windows::Forms::Label^ Display;
 			this->Display->BackColor = System::Drawing::Color::Gainsboro;
 			this->Display->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.125F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Display->Location = System::Drawing::Point(968, 258);
-			this->Display->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->Display->Location = System::Drawing::Point(1936, 496);
+			this->Display->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->Display->Name = L"Display";
-			this->Display->Size = System::Drawing::Size(98, 26);
+			this->Display->Size = System::Drawing::Size(160, 48);
 			this->Display->TabIndex = 24;
 			this->Display->Text = L"Hey Hot Stuff!\nI\'m Mr. Waves ;)";
 			// 
 			// DisplayBox
 			// 
-			this->DisplayBox->Location = System::Drawing::Point(936, 200);
-			this->DisplayBox->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->DisplayBox->Location = System::Drawing::Point(1872, 385);
+			this->DisplayBox->Margin = System::Windows::Forms::Padding(4);
 			this->DisplayBox->Name = L"DisplayBox";
-			this->DisplayBox->Size = System::Drawing::Size(140, 152);
+			this->DisplayBox->Size = System::Drawing::Size(280, 292);
 			this->DisplayBox->TabIndex = 3;
 			this->DisplayBox->UseVisualStyleBackColor = true;
 			// 
 			// MyForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Control;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(1254, 611);
+			this->ClientSize = System::Drawing::Size(2508, 1175);
 			this->Controls->Add(this->Display);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->DisplayBox);
 			this->DoubleBuffered = true;
-			this->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
+			this->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
-			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
 			this->panel3->ResumeLayout(false);
@@ -841,9 +880,6 @@ private: System::Windows::Forms::Label^ Display;
 #pragma endregion
 
 
-
-	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
-	}
 	private: System::Void Turntable_Click(System::Object^ sender, System::EventArgs^ e) {
 		static bool isOn = true;
 		if (isOn == false)
@@ -855,95 +891,149 @@ private: System::Windows::Forms::Label^ Display;
 			Display->Text = "Turntable ON";
 		}
 		isOn = !isOn;
-		//if else / turnery statements
 	}
-	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void Light_Click(System::Object^ sender, System::EventArgs^ e) {
+		static int lightState = 0;
+		switch (lightState) {
+		case 0:
+			Display->Text = "Light Off";
+			break;
+		case 1:
+			Display->Text = "Light Low";
+			break;
+		case 2:
+			Display->Text = "Light Medium";
+			break;
+		case 3:
+			Display->Text = "Light High";
+			break;
+		}
+		lightState++;
+		if (lightState == 4) {
+			lightState = 0;
+		}
+
 	}
-private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void label6_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void PowerGrillAuto_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void Popcorn_Click(System::Object^ sender, System::EventArgs^ e) {
-	Display->Text = "Popcorn";
-
-}
-
-private: System::Void Cook_Click(System::Object^ sender, System::EventArgs^ e) {
-	Display->Text = "Hey good lookin'\nWhat cha got cookin'?";
-
-}
-private: System::Void Reheat_Click(System::Object^ sender, System::EventArgs^ e) {
-	Display->Text = "Did you just come out\nof the oven?\nYou're HOT!";
-}
-private: System::Void KeepWarm_Click(System::Object^ sender, System::EventArgs^ e) {
-	Display->Text = "Keeping Warm";
-}
-	   
-private: System::Void KitchenTimer_Click(System::Object^ sender, System::EventArgs^ e) {
-	Display->Text = "T...";
-}
-private: System::Void Stop_Click(System::Object^ sender, System::EventArgs^ e) {
-	Display->Text = "Oh do behave";
-}
-private: System::Void Veggies_Click(System::Object^ sender, System::EventArgs^ e) {
-	Display->Text = "Veggin' out\nwith my cucumber out";
-}
-
-private: System::Void EcoMode_Click(System::Object^ sender, System::EventArgs^ e) {
-	static bool isOn = true;
-	if (isOn == false)
-	{
-		Display->Text = "EcoMode OFF";
+	private: System::Void Vent_Click(System::Object^ sender, System::EventArgs^ e) {
+		static int ventState = 0;
+		switch (ventState) {
+		case 0:
+			Display->Text = "Fan Off";
+			break;
+		case 1:
+			Display->Text = "Fan Low";
+			break;
+		case 2:
+			Display->Text = "Fan Medium";
+			break;
+		case 3:
+			Display->Text = "Fan High";
+			break;
+		}
+		ventState++;
+		if (ventState == 4) {
+			ventState = 0;
+		}
 	}
-	else
-	{
-		Display->Text = "EcoMode ON";
+	private: System::Void Popcorn_Click(System::Object^ sender, System::EventArgs^ e) {
+		Display->Text = "Popcorn";
 	}
-	isOn = !isOn;
+	private: System::Void Potato_Click(System::Object^ sender, System::EventArgs^ e) {
+		Display->Text = "Mr. Potato Head";
+	}
+	private: System::Void Pizza_Click(System::Object^ sender, System::EventArgs^ e) {
+		Display->Text = "Pizza Pizza";
+	}
+	private: System::Void Cook_Click(System::Object^ sender, System::EventArgs^ e) {
+		Display->Text = "Hey good lookin'\nWhat cha got cookin'?";
+	}
+	private: System::Void Reheat_Click(System::Object^ sender, System::EventArgs^ e) {
+		Display->Text = "Did you just come out\nof the oven?\nYou're HOT!";
+	}
+	private: System::Void Veggies_Click(System::Object^ sender, System::EventArgs^ e) {
+		Display->Text = "Veggin' out\nwith my cucumber out";
+	}
 
+	private: System::Void Microwave_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void PowerGrill_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void GrillMicrowave_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void AutoDefrost_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void PoundDefrost_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void PowerGrillAuto_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void Sound_Click(System::Object^ sender, System::EventArgs^ e) {
+		static int soundState = 0;
+		switch (soundState) {
+		case 0:
+			Display->Text = "Sound Off";
+			break;
+		case 1:
+			Display->Text = "Sound Low";
+			break;
+		case 2:
+			Display->Text = "Sound High";
+			break;
+		}
+		soundState++;
+		if (soundState == 3) {
+			soundState = 0;
+		}
+	}
+	private: System::Void PowerLevel_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void Increase10Sec_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void Decrease10Sec_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void OK_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void KeepWarm_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void KitchenTimer_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void Options_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void EcoMode_Click(System::Object^ sender, System::EventArgs^ e) {
+		static bool isOn = true;
+		if (isOn == false)
+		{
+			Display->Text = "EcoMode OFF";
+		}
+		else
+		{
+			Display->Text = "EcoMode ON";
+		}
+		isOn = !isOn;
+	}
 
+	private: System::Void Increase30Sec_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void Start_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void StopClear_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+		   //private: System::Void Timer_Display(System::Object^ sender, System::EventArgs^ e) {
+			  // Second++;
+			  // if (Second == 60) {
+				 //  Second = 0;
+				 //  Minute++;
+			  // }
+			  // Sec = Convert::ToString(Second);
+			  // Min = Convert::ToString(Minute);
+			  // //Time_Display->Text = Min + ":" + Sec;
+
+			  // //TODO:
+			  // // Create an input using the numbers, if button clicked 
+			  // // Need to allow timer to Pause and not stop using the stop button
+			  // // Need to allow timer to reset when double pressed on stop
+			   //We can either set the timer to what the user specifies and decrement, or we can increment starting and 0 and stopping at user input time (which may be easier)
+
+	};
 }
 
-private: System::Void Light_Click(System::Object^ sender, System::EventArgs^ e) {
-	static int lightState = 0;
-	switch (lightState) {
-	case 0:
-		Display->Text = "Light Off";
-		break;
-	case 1:
-		Display->Text = "Light Low";
-		break;
-	case 2:
-		Display->Text = "Light Medium";
-		break;
-	case 3:
-		Display->Text = "Light High";
-		break;
-	}
-	lightState++;
-	if (lightState == 4) {
-		lightState = 0;
-	}
-};
 
-
-private: System::Void Timer_Display(System::Object^ sender, System::EventArgs^ e) {
-	Second ++ ;
-	if (Second == 60) {
-		Second = 0;
-		Minute++;
-	}
-	Sec = Convert::ToString(Second);
-	Min = Convert::ToString(Minute);
-	//Time_Display->Text = Min + ":" + Sec;
-
-	//TODO:
-	// Create an input using the numbers, if button clicked 
-	// Need to allow timer to Pause and not stop using the stop button
-	// Need to allow timer to reset when double pressed on stop
-	//We can either set the timer to what the user specifies and decrement, or we can increment starting and 0 and stopping at user input time (which may be easier)
-}
-};
-}
