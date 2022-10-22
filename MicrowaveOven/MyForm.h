@@ -1,4 +1,9 @@
 #include <chrono>
+#include <iostream>
+#include <time.h>
+#include <conio.h>
+
+
 #pragma once
 
 namespace MicrowaveOven {
@@ -15,6 +20,9 @@ namespace MicrowaveOven {
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
 	public:
+		int powerState;
+		//string KeyInput;
+
 		MyForm(void)
 		{
 			InitializeComponent();
@@ -1006,6 +1014,45 @@ namespace MicrowaveOven {
 		}
 	}
 	private: System::Void PowerLevel_Click(System::Object^ sender, System::EventArgs^ e) {
+			switch (powerState) {
+			case 0:
+				Display->Text = "Please press for power level";
+				break;
+			case 1:
+				Display->Text = "Warm";
+				break;
+			case 2:
+				Display->Text = "Low";
+				break;
+			case 3:
+				Display->Text = "Defrost";
+				break;
+			case 4:
+				Display->Text = "Medium-Low";
+				break;
+			case 5:
+				Display->Text = "Medium";
+				break;
+			case 6:
+				Display->Text = "Simmer";
+				break;
+			case 7:
+				Display->Text = "Medium-High";
+				break;
+			case 8:
+				Display->Text = "Reheat";
+				break;
+			case 9:
+				Display->Text = "Saute";
+				break;
+			case 10:
+				Display->Text = "High";
+				break;
+		}
+		powerState++;
+		if (powerState == 11) {
+			powerState = 0;
+			}
 	}
 	private: System::Void Increase10Sec_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
