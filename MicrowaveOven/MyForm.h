@@ -16,6 +16,12 @@ namespace MicrowaveOven {
 	/// </summary>
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
+		//Timer member value
+			static int Second = 0;
+			static int Minute = 0;
+			static String^ Sec;
+			static String^ Min;
+
 	public:
 		MyForm(void)
 		{
@@ -874,6 +880,7 @@ private: System::Void Reheat_Click(System::Object^ sender, System::EventArgs^ e)
 private: System::Void KeepWarm_Click(System::Object^ sender, System::EventArgs^ e) {
 	Display->Text = "Keeping Warm";
 }
+	   
 private: System::Void KitchenTimer_Click(System::Object^ sender, System::EventArgs^ e) {
 	Display->Text = "T...";
 }
@@ -920,5 +927,23 @@ private: System::Void Light_Click(System::Object^ sender, System::EventArgs^ e) 
 		lightState = 0;
 	}
 };
+
+
+private: System::Void Timer_Display(System::Object^ sender, System::EventArgs^ e) {
+	Second ++ ;
+	if (Second == 60) {
+		Second = 0;
+		Minute++;
+	}
+	Sec = Convert::ToString(Second);
+	Min = Convert::ToString(Minute);
+	//Time_Display->Text = Min + ":" + Sec;
+
+	//TODO:
+	// Create an input using the numbers, if button clicked 
+	// Need to allow timer to Pause and not stop using the stop button
+	// Need to allow timer to reset when double pressed on stop
+	//We can either set the timer to what the user specifies and decrement, or we can increment starting and 0 and stopping at user input time (which may be easier)
+}
 };
 }
