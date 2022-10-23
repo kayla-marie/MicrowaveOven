@@ -1,12 +1,12 @@
+#pragma once
 #include <chrono>
-#include <string>
 #include <iostream>
 #include <time.h>
 #include <string>
 #include <stdlib.h>
-#include <conio.h>
+#include <sstream>
 
-#pragma once
+
 
 namespace MicrowaveOven {
 	using namespace System;
@@ -15,6 +15,7 @@ namespace MicrowaveOven {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace std;
 
 	/// <summary>
 	/// Summary for MyForm
@@ -23,7 +24,7 @@ namespace MicrowaveOven {
 	{
 	public:
 		int powerState;
-		//string KeyInput;
+		String^ KeyInput; 
 	int switch_power() {
 			switch (powerState) {
 			case 0:
@@ -931,7 +932,7 @@ namespace MicrowaveOven {
 			this->Display2->Name = L"Display2";
 			this->Display2->Size = System::Drawing::Size(160, 48);
 			this->Display2->TabIndex = 24;
-			this->Display2->Text = L"The time should be\ndiplayed here";
+			this->Display2->Text = L"1115";
 			// 
 			// DisplayBox2
 			// 
@@ -971,14 +972,18 @@ namespace MicrowaveOven {
 		}
 #pragma endregion
 
-	/*private: System::String getPresentTime(System::Object^ sender, System::EventArgs^ e) {
+	private: System::String^ getPresentTime() {
 		time_t tt;
 		struct tm* st;
-
+		string input;
 		time(&tt);
 		st = localtime(&tt);
-		Display2->Text = asctime(st);
-	}*/
+		input = asctime(st);
+		String^ output = gcnew String(input.data());
+		return output;
+
+		//Display2->Text = asctime(st);
+	}
 
 
 	private: System::Void Turntable_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -1117,20 +1122,26 @@ namespace MicrowaveOven {
 		}*/
 	}
 	private: System::Void Decrease10Sec_Click(System::Object^ sender, System::EventArgs^ e) {
-		/*int currentTime;
-		string math;
-
-		if (Display2->Text == asctime(st))
+		int currentTime;
+		String^ math;
+		string str;
+		if (Display2->Text == getPresentTime())
 			Display2->Text = "10";
 		else
 		{
 			KeyInput = Display->Text;
-			currentTime = stoi(KeyInput);
+			for (int i = 0; i < 5; ++i)
+			{
+				str += KeyInput[i];
+			}
+			stringstream x(str);
+			x >> currentTime;
+			//currentTime = int str;
 			currentTime -= 10;
-			math = itoa((currentTime / 60)) + ':' + itoa((currentTime % 60));
-			KeyInput = math;
+			str = to_string((currentTime / 60)) + to_string((currentTime % 60));
+			KeyInput = gcnew String(str.c_str());
 			Display2->Text = KeyInput;
-		}*/
+		}
 	}
 	private: System::Void OK_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
@@ -1178,14 +1189,14 @@ namespace MicrowaveOven {
 	
 	}
 		   //private: System::Void Timer_Display(System::Object^ sender, System::EventArgs^ e) {
-			  // Second++;
-			  // if (Second == 60) {
-				 //  Second = 0;
-				 //  Minute++;
-			  // }
-			  // Sec = Convert::ToString(Second);
-			  // Min = Convert::ToString(Minute);
-			  // //Time_Display->Text = Min + ":" + Sec;
+			/*   Second++;
+			   if (Second == 60) {
+				   Second = 0;
+				   Minute++;
+			   }
+			   Sec = Convert::ToString(Second);
+			   Min = Convert::ToString(Minute);*/
+			   //Time_Display->Text = Min + ":" + Sec;
 
 			  // //TODO:
 			  // // Create an input using the numbers, if button clicked 
@@ -1195,13 +1206,15 @@ namespace MicrowaveOven {
 
 	private: System::Void keyID1_Click(System::Object^ sender, System::EventArgs^ e) {
 		/*if (Display2->Text == asctime(st))
-			Display2->Text = "1";
-		else
 		{
-			KeyInput = Display->Text;
-			KeyInput += "1";
-			Display2->Text = KeyInput;
+			Display2->Text = "1";
 		}*/
+		//else
+		//{
+			/*KeyInput = Display->Text;
+			KeyInput += "1";
+			Display2->Text = KeyInput;*/
+		//}*/
 	}
 	private: System::Void keyID2_Click(System::Object^ sender, System::EventArgs^ e) {
 		/*if (Display2->Text == asctime(st))
