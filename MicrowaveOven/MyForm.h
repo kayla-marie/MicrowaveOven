@@ -22,6 +22,48 @@ namespace MicrowaveOven {
 	public:
 		int powerState;
 		//string KeyInput;
+	int switch_power() {
+			switch (powerState) {
+			case 0:
+				Display->Text = "Please press for power level";
+				break;
+			case 1:
+				Display->Text = "Warm";
+				break;
+			case 2:
+				Display->Text = "Low";
+				break;
+			case 3:
+				Display->Text = "Defrost";
+				break;
+			case 4:
+				Display->Text = "Medium-Low";
+				break;
+			case 5:
+				Display->Text = "Medium";
+				break;
+			case 6:
+				Display->Text = "Simmer";
+				break;
+			case 7:
+				Display->Text = "Medium-High";
+				break;
+			case 8:
+				Display->Text = "Reheat";
+				break;
+			case 9:
+				Display->Text = "Saute";
+				break;
+			case 10:
+				Display->Text = "High";
+				break;
+			}
+			powerState++;
+			if (powerState == 11) {
+				powerState = 0;
+			}
+			return powerState;
+		}
 
 		MyForm(void)
 		{
@@ -973,26 +1015,32 @@ namespace MicrowaveOven {
 	}
 
 	private: System::Void Microwave_Click(System::Object^ sender, System::EventArgs^ e) {
-		Display->Text = "Oven set to Microwave. Power Level:";
+		powerState = 6;
+		Display->Text = "Oven set to Microwave. Power Level: Simmer ";
 	}
 	private: System::Void PowerGrill_Click(System::Object^ sender, System::EventArgs^ e) {
-		Display->Text = "Oven set to PowerGrill. Power Level:";
+		powerState = 9;
+		Display->Text = "Oven set to PowerGrill. Power Level: Saute";
 
 	}
 	private: System::Void GrillMicrowave_Click(System::Object^ sender, System::EventArgs^ e) {
-		Display->Text = "Oven set to Grill. Power Level:";
+		powerState = 10;
+		Display->Text = "Oven set to Grill. Power Level: High";
 
 	}
 	private: System::Void AutoDefrost_Click(System::Object^ sender, System::EventArgs^ e) {
+		powerState = 3;
 		Display->Text = "Oven set to AutoDefrost.";
 
 	}
 	private: System::Void PoundDefrost_Click(System::Object^ sender, System::EventArgs^ e) {
-		Display->Text = "Oven set to Defrost. Power Level:";
+		powerState = 3;
+		Display->Text = "Oven set to Defrost. Power Level: Defrost";
 
 	}
 	private: System::Void PowerGrillAuto_Click(System::Object^ sender, System::EventArgs^ e) {
-		Display->Text = "Oven set to Auto PowerGrill. Power Level:";
+		powerState = 10;
+		Display->Text = "Oven set to Auto PowerGrill. Power Level: High";
 
 	}
 	private: System::Void Sound_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -1014,45 +1062,7 @@ namespace MicrowaveOven {
 		}
 	}
 	private: System::Void PowerLevel_Click(System::Object^ sender, System::EventArgs^ e) {
-			switch (powerState) {
-			case 0:
-				Display->Text = "Please press for power level";
-				break;
-			case 1:
-				Display->Text = "Warm";
-				break;
-			case 2:
-				Display->Text = "Low";
-				break;
-			case 3:
-				Display->Text = "Defrost";
-				break;
-			case 4:
-				Display->Text = "Medium-Low";
-				break;
-			case 5:
-				Display->Text = "Medium";
-				break;
-			case 6:
-				Display->Text = "Simmer";
-				break;
-			case 7:
-				Display->Text = "Medium-High";
-				break;
-			case 8:
-				Display->Text = "Reheat";
-				break;
-			case 9:
-				Display->Text = "Saute";
-				break;
-			case 10:
-				Display->Text = "High";
-				break;
-		}
-		powerState++;
-		if (powerState == 11) {
-			powerState = 0;
-			}
+		switch_power();
 	}
 	private: System::Void Increase10Sec_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
