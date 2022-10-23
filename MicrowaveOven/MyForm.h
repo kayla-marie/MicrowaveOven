@@ -1,8 +1,9 @@
 #include <chrono>
 #include <iostream>
 #include <time.h>
+#include <string>
+#include <stdlib.h>
 #include <conio.h>
-
 
 #pragma once
 
@@ -84,6 +85,7 @@ namespace MicrowaveOven {
 				delete components;
 			}
 		}
+
 	private: System::Windows::Forms::Button^ Turntable;
 	private: System::Windows::Forms::Button^ Light;
 	protected:
@@ -170,6 +172,8 @@ namespace MicrowaveOven {
 
 	private: System::Windows::Forms::Button^ DisplayBox;
 	private: System::Windows::Forms::Label^ Display;
+	private: System::Windows::Forms::Button^ DisplayBox2;
+	private: System::Windows::Forms::Label^ Display2;
 	private: System::Windows::Forms::Button^ PowerLevel;
 	private: System::Windows::Forms::Button^ Sound;
 	private: System::Windows::Forms::Timer^ Timer;
@@ -248,6 +252,8 @@ namespace MicrowaveOven {
 			this->Vent = (gcnew System::Windows::Forms::Button());
 			this->Display = (gcnew System::Windows::Forms::Label());
 			this->DisplayBox = (gcnew System::Windows::Forms::Button());
+			this->Display2 = (gcnew System::Windows::Forms::Label());
+			this->DisplayBox2 = (gcnew System::Windows::Forms::Button());
 			this->Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->panel1->SuspendLayout();
 			this->panel3->SuspendLayout();
@@ -913,6 +919,28 @@ namespace MicrowaveOven {
 			this->DisplayBox->TabIndex = 3;
 			this->DisplayBox->UseVisualStyleBackColor = true;
 			// 
+			// Display2
+			// 
+			this->Display2->AutoSize = true;
+			this->Display2->BackColor = System::Drawing::Color::Gainsboro;
+			this->Display2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.125F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->Display2->Location = System::Drawing::Point(750, 450);
+			this->Display2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->Display2->Name = L"Display2";
+			this->Display2->Size = System::Drawing::Size(160, 48);
+			this->Display2->TabIndex = 24;
+			this->Display2->Text = L"The time should be\ndiplayed here";
+			// 
+			// DisplayBox2
+			// 
+			this->DisplayBox2->Location = System::Drawing::Point(700, 300);
+			this->DisplayBox2->Margin = System::Windows::Forms::Padding(4);
+			this->DisplayBox2->Name = L"DisplayBox2";
+			this->DisplayBox2->Size = System::Drawing::Size(280, 292);
+			this->DisplayBox2->TabIndex = 3;
+			this->DisplayBox2->UseVisualStyleBackColor = true;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
@@ -924,6 +952,9 @@ namespace MicrowaveOven {
 			this->Controls->Add(this->Display);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->DisplayBox);
+			this->Controls->Add(this->Display2);
+			//this->Controls->Add(this->panel1);
+			this->Controls->Add(this->DisplayBox2);
 			this->DoubleBuffered = true;
 			this->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Name = L"MyForm";
@@ -938,6 +969,15 @@ namespace MicrowaveOven {
 
 		}
 #pragma endregion
+
+	//private: System::String getPresentTime(System::Object^ sender, System::EventArgs^ e) {
+	//	time_t tt;
+	//	struct tm* st;
+
+	//	time(&tt);
+	//	st = localtime_s(&tt);
+	//	Display2->Text = asctime(st);
+	//}
 
 
 	private: System::Void Turntable_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -996,13 +1036,13 @@ namespace MicrowaveOven {
 		}
 	}
 	private: System::Void Popcorn_Click(System::Object^ sender, System::EventArgs^ e) {
-		Display->Text = "Popcorn";
+		Display->Text = "Popping Popcorn";
 	}
 	private: System::Void Potato_Click(System::Object^ sender, System::EventArgs^ e) {
-		Display->Text = "Mr. Potato Head";
+		Display->Text = "Baking Potato";
 	}
 	private: System::Void Pizza_Click(System::Object^ sender, System::EventArgs^ e) {
-		Display->Text = "Pizza Pizza";
+		Display->Text = "Making a Pizza";
 	}
 	private: System::Void Cook_Click(System::Object^ sender, System::EventArgs^ e) {
 		Display->Text = "Hey good lookin'\nWhat cha got cookin'?";
@@ -1043,6 +1083,7 @@ namespace MicrowaveOven {
 		Display->Text = "Oven set to Auto PowerGrill. Power Level: High";
 
 	}
+
 	private: System::Void Sound_Click(System::Object^ sender, System::EventArgs^ e) {
 		static int soundState = 0;
 		switch (soundState) {
@@ -1064,6 +1105,7 @@ namespace MicrowaveOven {
 	private: System::Void PowerLevel_Click(System::Object^ sender, System::EventArgs^ e) {
 		switch_power();
 	}
+
 	private: System::Void Increase10Sec_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void Decrease10Sec_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -1076,6 +1118,7 @@ namespace MicrowaveOven {
 	private: System::Void KitchenTimer_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void Options_Click(System::Object^ sender, System::EventArgs^ e) {
+	
 	}
 	private: System::Void EcoMode_Click(System::Object^ sender, System::EventArgs^ e) {
 		static bool isOn = true;
@@ -1095,6 +1138,8 @@ namespace MicrowaveOven {
 	private: System::Void Start_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void StopClear_Click(System::Object^ sender, System::EventArgs^ e) {
+	
+	
 	}
 		   //private: System::Void Timer_Display(System::Object^ sender, System::EventArgs^ e) {
 			  // Second++;
