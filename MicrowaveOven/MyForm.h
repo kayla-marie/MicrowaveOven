@@ -3,6 +3,8 @@
 #include <time.h>
 #include <string>
 #include <stdlib.h>
+#include <conio.h>
+
 #pragma once
 
 namespace MicrowaveOven {
@@ -21,7 +23,7 @@ namespace MicrowaveOven {
 	public:
 		int powerState;
 		//string KeyInput;
-		int switch_power() {
+	int switch_power() {
 			switch (powerState) {
 			case 0:
 				Display->Text = "Please press for power level";
