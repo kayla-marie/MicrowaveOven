@@ -1014,6 +1014,7 @@ namespace MicrowaveOven {
 	private: System::Void OK_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void KeepWarm_Click(System::Object^ sender, System::EventArgs^ e) {
+		Display->Text = "Keeping Food \nWarm";
 	}
 	private: System::Void KitchenTimer_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
