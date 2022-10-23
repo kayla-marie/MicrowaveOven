@@ -28,7 +28,7 @@ namespace MicrowaveOven {
 		int switch_power() {
 			switch (powerState) {
 			case 0:
-				Display->Text = "Please press for power level";
+				Display->Text = "Please press \nfor power level";
 				break;
 			case 1:
 				Display->Text = "Warm";
@@ -1055,37 +1055,37 @@ namespace MicrowaveOven {
 		Display->Text = "Making a Pizza";
 	}
 	private: System::Void Cook_Click(System::Object^ sender, System::EventArgs^ e) {
-		Display->Text = "Hey good lookin'\nWhat cha got cookin'?";
+		Display->Text = "Hey good lookin'\n\nWhat cha got\ncookin'?";
 	}
 	private: System::Void Reheat_Click(System::Object^ sender, System::EventArgs^ e) {
-		Display->Text = "Did you just come out\nof the oven?\nYou're HOT!";
+		Display->Text = "Did you just come\nout of the oven?\n\nYou're HOT!";
 	}
 	private: System::Void Veggies_Click(System::Object^ sender, System::EventArgs^ e) {
-		Display->Text = "Veggin' out\nwith my cucumber out";
+		Display->Text = "Veggin' out with\nmy cucumber out";
 	}
 	private: System::Void Microwave_Click(System::Object^ sender, System::EventArgs^ e) {
 		powerState = 6;
-		Display->Text = "Oven set to Microwave. Power Level: Simmer ";
+		Display->Text = "Oven set to:\nMicrowave\n\nPower Level:\nSimmer";
 	}
 	private: System::Void PowerGrill_Click(System::Object^ sender, System::EventArgs^ e) {
 		powerState = 9;
-		Display->Text = "Oven set to PowerGrill. Power Level: Saute";
+		Display->Text = "Oven set to:\nPowerGrill.\n\nPower Level:\nSaute";
 	}
 	private: System::Void GrillMicrowave_Click(System::Object^ sender, System::EventArgs^ e) {
 		powerState = 10;
-		Display->Text = "Oven set to Grill. Power Level: High";
+		Display->Text = "Oven set to:\nGrill.\n\nPower Level:\nHigh";
 	}
 	private: System::Void AutoDefrost_Click(System::Object^ sender, System::EventArgs^ e) {
 		powerState = 3;
-		Display->Text = "Oven set to AutoDefrost.";
+		Display->Text = "Oven set to:\nAutoDefrost.";
 	}
 	private: System::Void PoundDefrost_Click(System::Object^ sender, System::EventArgs^ e) {
 		powerState = 3;
-		Display->Text = "Oven set to Defrost. Power Level: Defrost";
+		Display->Text = "Oven set to:\nDefrost.\n\nPower Level:\nDefrost";
 	}
 	private: System::Void PowerGrillAuto_Click(System::Object^ sender, System::EventArgs^ e) {
 		powerState = 10;
-		Display->Text = "Oven set to Auto PowerGrill. Power Level: High";
+		Display->Text = "Oven set to:\nAuto PowerGrill.\n\nPower Level:\nHigh";
 	}
 
 	private: System::Void Sound_Click(System::Object^ sender, System::EventArgs^ e) {
