@@ -1,11 +1,12 @@
+#pragma once
 #include <chrono>
 #include <iostream>
 #include <time.h>
 #include <string>
 #include <stdlib.h>
-#include <conio.h>
+#include <sstream>
 
-#pragma once
+
 
 namespace MicrowaveOven {
 	using namespace System;
@@ -14,6 +15,7 @@ namespace MicrowaveOven {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace std;
 
 	/// <summary>
 	/// Summary for MyForm
@@ -22,8 +24,8 @@ namespace MicrowaveOven {
 	{
 	public:
 		int powerState;
-		//string KeyInput;
-	int switch_power() {
+		String^ KeyInput;
+		int switch_power() {
 			switch (powerState) {
 			case 0:
 				Display->Text = "Please press for power level";
@@ -85,7 +87,6 @@ namespace MicrowaveOven {
 				delete components;
 			}
 		}
-
 	private: System::Windows::Forms::Button^ Turntable;
 	private: System::Windows::Forms::Button^ Light;
 	protected:
@@ -172,11 +173,14 @@ namespace MicrowaveOven {
 
 	private: System::Windows::Forms::Button^ DisplayBox;
 	private: System::Windows::Forms::Label^ Display;
-	private: System::Windows::Forms::Button^ DisplayBox2;
-	private: System::Windows::Forms::Label^ Display2;
-	private: System::Windows::Forms::Button^ PowerLevel;
 	private: System::Windows::Forms::Button^ Sound;
 	private: System::Windows::Forms::Timer^ Timer;
+	private: System::Windows::Forms::Label^ DisplayText2;
+
+	private: System::Windows::Forms::Button^ Display2;
+	private: System::Windows::Forms::Button^ PowerLevel;
+
+
 	private: System::ComponentModel::IContainer^ components;
 
 
@@ -252,9 +256,9 @@ namespace MicrowaveOven {
 			this->Vent = (gcnew System::Windows::Forms::Button());
 			this->Display = (gcnew System::Windows::Forms::Label());
 			this->DisplayBox = (gcnew System::Windows::Forms::Button());
-			this->Display2 = (gcnew System::Windows::Forms::Label());
-			this->DisplayBox2 = (gcnew System::Windows::Forms::Button());
 			this->Timer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->DisplayText2 = (gcnew System::Windows::Forms::Label());
+			this->Display2 = (gcnew System::Windows::Forms::Button());
 			this->panel1->SuspendLayout();
 			this->panel3->SuspendLayout();
 			this->panel2->SuspendLayout();
@@ -266,7 +270,7 @@ namespace MicrowaveOven {
 			this->Turntable->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Turntable->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->Turntable->Location = System::Drawing::Point(4, 12);
+			this->Turntable->Location = System::Drawing::Point(19, 12);
 			this->Turntable->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Turntable->Name = L"Turntable";
 			this->Turntable->Size = System::Drawing::Size(148, 58);
@@ -280,7 +284,7 @@ namespace MicrowaveOven {
 			this->Light->BackColor = System::Drawing::Color::Transparent;
 			this->Light->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Light->Location = System::Drawing::Point(4, 98);
+			this->Light->Location = System::Drawing::Point(19, 98);
 			this->Light->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Light->Name = L"Light";
 			this->Light->Size = System::Drawing::Size(76, 33);
@@ -316,7 +320,7 @@ namespace MicrowaveOven {
 			this->panel1->Controls->Add(this->Vent);
 			this->panel1->Controls->Add(this->Turntable);
 			this->panel1->Controls->Add(this->Light);
-			this->panel1->Location = System::Drawing::Point(132, 758);
+			this->panel1->Location = System::Drawing::Point(172, 758);
 			this->panel1->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(2048, 177);
@@ -324,23 +328,23 @@ namespace MicrowaveOven {
 			// 
 			// PowerLevel
 			// 
-			this->PowerLevel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.125F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->PowerLevel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->PowerLevel->Location = System::Drawing::Point(953, 88);
+			this->PowerLevel->Location = System::Drawing::Point(1014, 85);
 			this->PowerLevel->Name = L"PowerLevel";
-			this->PowerLevel->Size = System::Drawing::Size(148, 56);
-			this->PowerLevel->TabIndex = 25;
-			this->PowerLevel->Text = L"PowerLevel";
+			this->PowerLevel->Size = System::Drawing::Size(120, 55);
+			this->PowerLevel->TabIndex = 26;
+			this->PowerLevel->Text = L"Power Level";
 			this->PowerLevel->UseVisualStyleBackColor = true;
 			this->PowerLevel->Click += gcnew System::EventHandler(this, &MyForm::PowerLevel_Click);
 			// 
 			// Sound
 			// 
-			this->Sound->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.125F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->Sound->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Sound->Location = System::Drawing::Point(952, 18);
+			this->Sound->Location = System::Drawing::Point(1014, 21);
 			this->Sound->Name = L"Sound";
-			this->Sound->Size = System::Drawing::Size(120, 58);
+			this->Sound->Size = System::Drawing::Size(120, 49);
 			this->Sound->TabIndex = 24;
 			this->Sound->Text = L"Sound";
 			this->Sound->UseVisualStyleBackColor = true;
@@ -352,7 +356,7 @@ namespace MicrowaveOven {
 			this->label2->BackColor = System::Drawing::Color::Transparent;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6));
 			this->label2->ForeColor = System::Drawing::SystemColors::Control;
-			this->label2->Location = System::Drawing::Point(1972, 65);
+			this->label2->Location = System::Drawing::Point(1913, 65);
 			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(47, 20);
@@ -364,7 +368,7 @@ namespace MicrowaveOven {
 			this->StopClear->BackColor = System::Drawing::Color::Transparent;
 			this->StopClear->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->StopClear->Location = System::Drawing::Point(1952, 85);
+			this->StopClear->Location = System::Drawing::Point(1893, 85);
 			this->StopClear->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->StopClear->Name = L"StopClear";
 			this->StopClear->Size = System::Drawing::Size(92, 60);
@@ -378,7 +382,7 @@ namespace MicrowaveOven {
 			this->Increase30Sec->BackColor = System::Drawing::Color::Transparent;
 			this->Increase30Sec->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Increase30Sec->Location = System::Drawing::Point(1860, 88);
+			this->Increase30Sec->Location = System::Drawing::Point(1801, 88);
 			this->Increase30Sec->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Increase30Sec->Name = L"Increase30Sec";
 			this->Increase30Sec->Size = System::Drawing::Size(80, 56);
@@ -392,7 +396,7 @@ namespace MicrowaveOven {
 			this->Options->BackColor = System::Drawing::Color::Transparent;
 			this->Options->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Options->Location = System::Drawing::Point(1740, 88);
+			this->Options->Location = System::Drawing::Point(1681, 88);
 			this->Options->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Options->Name = L"Options";
 			this->Options->Size = System::Drawing::Size(102, 56);
@@ -406,10 +410,10 @@ namespace MicrowaveOven {
 			this->KeepWarm->BackColor = System::Drawing::Color::Transparent;
 			this->KeepWarm->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->KeepWarm->Location = System::Drawing::Point(1644, 85);
+			this->KeepWarm->Location = System::Drawing::Point(1585, 85);
 			this->KeepWarm->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->KeepWarm->Name = L"KeepWarm";
-			this->KeepWarm->Size = System::Drawing::Size(84, 60);
+			this->KeepWarm->Size = System::Drawing::Size(76, 60);
 			this->KeepWarm->TabIndex = 19;
 			this->KeepWarm->Text = L"Keep Warm";
 			this->KeepWarm->UseVisualStyleBackColor = false;
@@ -420,7 +424,7 @@ namespace MicrowaveOven {
 			this->Start->BackColor = System::Drawing::Color::Transparent;
 			this->Start->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Start->Location = System::Drawing::Point(1952, 21);
+			this->Start->Location = System::Drawing::Point(1893, 21);
 			this->Start->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Start->Name = L"Start";
 			this->Start->Size = System::Drawing::Size(92, 50);
@@ -434,7 +438,7 @@ namespace MicrowaveOven {
 			this->EcoMode->BackColor = System::Drawing::Color::Transparent;
 			this->EcoMode->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->EcoMode->Location = System::Drawing::Point(1860, 21);
+			this->EcoMode->Location = System::Drawing::Point(1801, 21);
 			this->EcoMode->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->EcoMode->Name = L"EcoMode";
 			this->EcoMode->Size = System::Drawing::Size(80, 60);
@@ -448,7 +452,7 @@ namespace MicrowaveOven {
 			this->KitchenTimer->BackColor = System::Drawing::Color::Transparent;
 			this->KitchenTimer->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->KitchenTimer->Location = System::Drawing::Point(1740, 17);
+			this->KitchenTimer->Location = System::Drawing::Point(1681, 17);
 			this->KitchenTimer->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->KitchenTimer->Name = L"KitchenTimer";
 			this->KitchenTimer->Size = System::Drawing::Size(102, 62);
@@ -462,7 +466,7 @@ namespace MicrowaveOven {
 			this->OK->BackColor = System::Drawing::Color::Transparent;
 			this->OK->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->OK->Location = System::Drawing::Point(1644, 21);
+			this->OK->Location = System::Drawing::Point(1585, 21);
 			this->OK->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->OK->Name = L"OK";
 			this->OK->Size = System::Drawing::Size(76, 56);
@@ -483,7 +487,7 @@ namespace MicrowaveOven {
 			this->panel3->Controls->Add(this->keyID3);
 			this->panel3->Controls->Add(this->keyID2);
 			this->panel3->Controls->Add(this->keyID1);
-			this->panel3->Location = System::Drawing::Point(1276, 21);
+			this->panel3->Location = System::Drawing::Point(1217, 21);
 			this->panel3->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->panel3->Name = L"panel3";
 			this->panel3->Size = System::Drawing::Size(356, 119);
@@ -634,7 +638,7 @@ namespace MicrowaveOven {
 			this->Decrease10Sec->BackColor = System::Drawing::Color::Transparent;
 			this->Decrease10Sec->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Decrease10Sec->Location = System::Drawing::Point(1224, 77);
+			this->Decrease10Sec->Location = System::Drawing::Point(1165, 77);
 			this->Decrease10Sec->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Decrease10Sec->Name = L"Decrease10Sec";
 			this->Decrease10Sec->Size = System::Drawing::Size(44, 48);
@@ -648,7 +652,7 @@ namespace MicrowaveOven {
 			this->Increase10Sec->BackColor = System::Drawing::Color::Transparent;
 			this->Increase10Sec->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.875F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Increase10Sec->Location = System::Drawing::Point(1224, 31);
+			this->Increase10Sec->Location = System::Drawing::Point(1165, 31);
 			this->Increase10Sec->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Increase10Sec->Name = L"Increase10Sec";
 			this->Increase10Sec->Size = System::Drawing::Size(44, 48);
@@ -662,10 +666,10 @@ namespace MicrowaveOven {
 			this->PowerGrillAuto->BackColor = System::Drawing::Color::Transparent;
 			this->PowerGrillAuto->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->PowerGrillAuto->Location = System::Drawing::Point(804, 85);
+			this->PowerGrillAuto->Location = System::Drawing::Point(867, 86);
 			this->PowerGrillAuto->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->PowerGrillAuto->Name = L"PowerGrillAuto";
-			this->PowerGrillAuto->Size = System::Drawing::Size(116, 58);
+			this->PowerGrillAuto->Size = System::Drawing::Size(129, 56);
 			this->PowerGrillAuto->TabIndex = 9;
 			this->PowerGrillAuto->Text = L"Power\nGrillAuto";
 			this->PowerGrillAuto->UseVisualStyleBackColor = false;
@@ -676,10 +680,10 @@ namespace MicrowaveOven {
 			this->PoundDefrost->BackColor = System::Drawing::Color::Transparent;
 			this->PoundDefrost->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->PoundDefrost->Location = System::Drawing::Point(668, 85);
+			this->PoundDefrost->Location = System::Drawing::Point(721, 85);
 			this->PoundDefrost->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->PoundDefrost->Name = L"PoundDefrost";
-			this->PoundDefrost->Size = System::Drawing::Size(118, 60);
+			this->PoundDefrost->Size = System::Drawing::Size(118, 55);
 			this->PoundDefrost->TabIndex = 8;
 			this->PoundDefrost->Text = L"1 Pound \nDefrost";
 			this->PoundDefrost->UseVisualStyleBackColor = false;
@@ -690,10 +694,10 @@ namespace MicrowaveOven {
 			this->AutoDefrost->BackColor = System::Drawing::Color::Transparent;
 			this->AutoDefrost->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->AutoDefrost->Location = System::Drawing::Point(528, 85);
+			this->AutoDefrost->Location = System::Drawing::Point(577, 85);
 			this->AutoDefrost->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->AutoDefrost->Name = L"AutoDefrost";
-			this->AutoDefrost->Size = System::Drawing::Size(116, 60);
+			this->AutoDefrost->Size = System::Drawing::Size(132, 52);
 			this->AutoDefrost->TabIndex = 7;
 			this->AutoDefrost->Text = L"Auto \nDefrost";
 			this->AutoDefrost->UseVisualStyleBackColor = false;
@@ -704,10 +708,10 @@ namespace MicrowaveOven {
 			this->GrillMicrowave->BackColor = System::Drawing::Color::Transparent;
 			this->GrillMicrowave->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->GrillMicrowave->Location = System::Drawing::Point(792, 17);
+			this->GrillMicrowave->Location = System::Drawing::Point(868, 21);
 			this->GrillMicrowave->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->GrillMicrowave->Name = L"GrillMicrowave";
-			this->GrillMicrowave->Size = System::Drawing::Size(128, 56);
+			this->GrillMicrowave->Size = System::Drawing::Size(128, 51);
 			this->GrillMicrowave->TabIndex = 6;
 			this->GrillMicrowave->Text = L"Grill + \nMicrowave";
 			this->GrillMicrowave->UseVisualStyleBackColor = false;
@@ -718,7 +722,7 @@ namespace MicrowaveOven {
 			this->PowerGrill->BackColor = System::Drawing::Color::Transparent;
 			this->PowerGrill->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->PowerGrill->Location = System::Drawing::Point(668, 21);
+			this->PowerGrill->Location = System::Drawing::Point(721, 21);
 			this->PowerGrill->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->PowerGrill->Name = L"PowerGrill";
 			this->PowerGrill->Size = System::Drawing::Size(118, 38);
@@ -732,7 +736,7 @@ namespace MicrowaveOven {
 			this->Microwave->BackColor = System::Drawing::Color::Transparent;
 			this->Microwave->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Microwave->Location = System::Drawing::Point(528, 19);
+			this->Microwave->Location = System::Drawing::Point(577, 19);
 			this->Microwave->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Microwave->Name = L"Microwave";
 			this->Microwave->Size = System::Drawing::Size(132, 40);
@@ -753,7 +757,7 @@ namespace MicrowaveOven {
 			this->panel2->Controls->Add(this->Potato);
 			this->panel2->Controls->Add(this->Popcorn);
 			this->panel2->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->panel2->Location = System::Drawing::Point(160, 2);
+			this->panel2->Location = System::Drawing::Point(185, 2);
 			this->panel2->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->panel2->Name = L"panel2";
 			this->panel2->Size = System::Drawing::Size(356, 140);
@@ -888,7 +892,7 @@ namespace MicrowaveOven {
 			this->Vent->BackColor = System::Drawing::Color::Transparent;
 			this->Vent->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Vent->Location = System::Drawing::Point(84, 98);
+			this->Vent->Location = System::Drawing::Point(99, 98);
 			this->Vent->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Vent->Name = L"Vent";
 			this->Vent->Size = System::Drawing::Size(68, 33);
@@ -903,7 +907,7 @@ namespace MicrowaveOven {
 			this->Display->BackColor = System::Drawing::Color::Gainsboro;
 			this->Display->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.125F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Display->Location = System::Drawing::Point(1936, 496);
+			this->Display->Location = System::Drawing::Point(1927, 586);
 			this->Display->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->Display->Name = L"Display";
 			this->Display->Size = System::Drawing::Size(160, 48);
@@ -912,34 +916,34 @@ namespace MicrowaveOven {
 			// 
 			// DisplayBox
 			// 
-			this->DisplayBox->Location = System::Drawing::Point(1872, 385);
+			this->DisplayBox->Location = System::Drawing::Point(1872, 451);
 			this->DisplayBox->Margin = System::Windows::Forms::Padding(4);
 			this->DisplayBox->Name = L"DisplayBox";
 			this->DisplayBox->Size = System::Drawing::Size(280, 292);
 			this->DisplayBox->TabIndex = 3;
 			this->DisplayBox->UseVisualStyleBackColor = true;
 			// 
+			// DisplayText2
+			// 
+			this->DisplayText2->AutoSize = true;
+			this->DisplayText2->BackColor = System::Drawing::Color::Gainsboro;
+			this->DisplayText2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.125F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->DisplayText2->Location = System::Drawing::Point(1988, 362);
+			this->DisplayText2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->DisplayText2->Name = L"DisplayText2";
+			this->DisplayText2->Size = System::Drawing::Size(54, 24);
+			this->DisplayText2->TabIndex = 26;
+			this->DisplayText2->Text = L"1234";
+			// 
 			// Display2
 			// 
-			this->Display2->AutoSize = true;
-			this->Display2->BackColor = System::Drawing::Color::Gainsboro;
-			this->Display2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.125F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->Display2->Location = System::Drawing::Point(750, 450);
-			this->Display2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->Display2->Location = System::Drawing::Point(1872, 313);
+			this->Display2->Margin = System::Windows::Forms::Padding(4);
 			this->Display2->Name = L"Display2";
-			this->Display2->Size = System::Drawing::Size(160, 48);
-			this->Display2->TabIndex = 24;
-			this->Display2->Text = L"The time should be\ndiplayed here";
-			// 
-			// DisplayBox2
-			// 
-			this->DisplayBox2->Location = System::Drawing::Point(700, 300);
-			this->DisplayBox2->Margin = System::Windows::Forms::Padding(4);
-			this->DisplayBox2->Name = L"DisplayBox2";
-			this->DisplayBox2->Size = System::Drawing::Size(280, 292);
-			this->DisplayBox2->TabIndex = 3;
-			this->DisplayBox2->UseVisualStyleBackColor = true;
+			this->Display2->Size = System::Drawing::Size(280, 121);
+			this->Display2->TabIndex = 25;
+			this->Display2->UseVisualStyleBackColor = true;
 			// 
 			// MyForm
 			// 
@@ -949,12 +953,11 @@ namespace MicrowaveOven {
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->ClientSize = System::Drawing::Size(2508, 1175);
+			this->Controls->Add(this->DisplayText2);
+			this->Controls->Add(this->Display2);
 			this->Controls->Add(this->Display);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->DisplayBox);
-			this->Controls->Add(this->Display2);
-			//this->Controls->Add(this->panel1);
-			this->Controls->Add(this->DisplayBox2);
 			this->DoubleBuffered = true;
 			this->Margin = System::Windows::Forms::Padding(4, 2, 4, 2);
 			this->Name = L"MyForm";
@@ -970,14 +973,21 @@ namespace MicrowaveOven {
 		}
 #pragma endregion
 
-	//private: System::String getPresentTime(System::Object^ sender, System::EventArgs^ e) {
-	//	time_t tt;
-	//	struct tm* st;
 
-	//	time(&tt);
-	//	st = localtime_s(&tt);
-	//	Display2->Text = asctime(st);
-	//}
+#pragma endregion
+
+	private: System::String^ getPresentTime() {
+		time_t tt;
+		struct tm* st;
+		string input;
+		time(&tt);
+		st = localtime(&tt);
+		input = asctime(st);
+		String^ output = gcnew String(input.data());
+		return output;
+
+		//Display2->Text = asctime(st);
+	}
 
 
 	private: System::Void Turntable_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -1053,7 +1063,6 @@ namespace MicrowaveOven {
 	private: System::Void Veggies_Click(System::Object^ sender, System::EventArgs^ e) {
 		Display->Text = "Veggin' out\nwith my cucumber out";
 	}
-
 	private: System::Void Microwave_Click(System::Object^ sender, System::EventArgs^ e) {
 		powerState = 6;
 		Display->Text = "Oven set to Microwave. Power Level: Simmer ";
@@ -1061,27 +1070,22 @@ namespace MicrowaveOven {
 	private: System::Void PowerGrill_Click(System::Object^ sender, System::EventArgs^ e) {
 		powerState = 9;
 		Display->Text = "Oven set to PowerGrill. Power Level: Saute";
-
 	}
 	private: System::Void GrillMicrowave_Click(System::Object^ sender, System::EventArgs^ e) {
 		powerState = 10;
 		Display->Text = "Oven set to Grill. Power Level: High";
-
 	}
 	private: System::Void AutoDefrost_Click(System::Object^ sender, System::EventArgs^ e) {
 		powerState = 3;
 		Display->Text = "Oven set to AutoDefrost.";
-
 	}
 	private: System::Void PoundDefrost_Click(System::Object^ sender, System::EventArgs^ e) {
 		powerState = 3;
 		Display->Text = "Oven set to Defrost. Power Level: Defrost";
-
 	}
 	private: System::Void PowerGrillAuto_Click(System::Object^ sender, System::EventArgs^ e) {
 		powerState = 10;
 		Display->Text = "Oven set to Auto PowerGrill. Power Level: High";
-
 	}
 
 	private: System::Void Sound_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -1105,10 +1109,43 @@ namespace MicrowaveOven {
 	private: System::Void PowerLevel_Click(System::Object^ sender, System::EventArgs^ e) {
 		switch_power();
 	}
-
 	private: System::Void Increase10Sec_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*int currentTime;
+		string math;
+
+		if (Display2->Text == asctime(st))
+			Display2->Text = "10";
+		else
+		{
+			KeyInput = Display->Text;
+			currentTime = stoi(KeyInput);
+			currentTime += 10;
+			math = itoa((currentTime / 60)) + ':' + itoa((currentTime % 60));
+			KeyInput = math;
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void Decrease10Sec_Click(System::Object^ sender, System::EventArgs^ e) {
+		int currentTime;
+		String^ math;
+		string str;
+		if (Display2->Text == getPresentTime())
+			Display2->Text = "10";
+		else
+		{
+			KeyInput = Display->Text;
+			for (int i = 0; i < 5; ++i)
+			{
+				str += KeyInput[i];
+			}
+			stringstream x(str);
+			x >> currentTime;
+			//currentTime = int str;
+			currentTime -= 10;
+			str = to_string((currentTime / 60)) + to_string((currentTime % 60));
+			KeyInput = gcnew String(str.c_str());
+			Display2->Text = KeyInput;
+		}
 	}
 	private: System::Void OK_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
@@ -1118,7 +1155,7 @@ namespace MicrowaveOven {
 	private: System::Void KitchenTimer_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void Options_Click(System::Object^ sender, System::EventArgs^ e) {
-	
+
 	}
 	private: System::Void EcoMode_Click(System::Object^ sender, System::EventArgs^ e) {
 		static bool isOn = true;
@@ -1134,22 +1171,36 @@ namespace MicrowaveOven {
 	}
 
 	private: System::Void Increase30Sec_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*int currentTime;
+		string math;
+
+		if (Display2->Text == asctime(st))
+			Display2->Text = "30";
+		else
+		{
+			KeyInput = Display->Text;
+			currentTime = stoi(KeyInput);
+			currentTime += 30;
+			math = itoa((currentTime / 60)) + ':' + itoa((currentTime % 60));
+			KeyInput = math;
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void Start_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void StopClear_Click(System::Object^ sender, System::EventArgs^ e) {
-	
-	
+
+
 	}
 		   //private: System::Void Timer_Display(System::Object^ sender, System::EventArgs^ e) {
-			  // Second++;
-			  // if (Second == 60) {
-				 //  Second = 0;
-				 //  Minute++;
-			  // }
-			  // Sec = Convert::ToString(Second);
-			  // Min = Convert::ToString(Minute);
-			  // //Time_Display->Text = Min + ":" + Sec;
+			/*   Second++;
+			   if (Second == 60) {
+				   Second = 0;
+				   Minute++;
+			   }
+			   Sec = Convert::ToString(Second);
+			   Min = Convert::ToString(Minute);*/
+			   //Time_Display->Text = Min + ":" + Sec;
 
 			  // //TODO:
 			  // // Create an input using the numbers, if button clicked 
@@ -1158,26 +1209,107 @@ namespace MicrowaveOven {
 			   //We can either set the timer to what the user specifies and decrement, or we can increment starting and 0 and stopping at user input time (which may be easier)
 
 	private: System::Void keyID1_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*if (Display2->Text == asctime(st))
+		{
+			Display2->Text = "1";
+		}*/
+		//else
+		//{
+			/*KeyInput = Display->Text;
+			KeyInput += "1";
+			Display2->Text = KeyInput;*/
+			//}*/
 	}
 	private: System::Void keyID2_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*if (Display2->Text == asctime(st))
+			Display2->Text = "2";
+		else
+		{
+			KeyInput = Display->Text;
+			KeyInput += "2";
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void keyID3_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*if (Display2->Text == asctime(st))
+			Display2->Text = "3";
+		else
+		{
+			KeyInput = Display->Text;
+			KeyInput += "3";
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void keyID4_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*if (Display2->Text == asctime(st))
+			Display2->Text = "4";
+		else
+		{
+			KeyInput = Display->Text;
+			KeyInput += "4";
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void keyID5_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*if (Display2->Text == asctime(st))
+			Display2->Text = "5";
+		else
+		{
+			KeyInput = Display->Text;
+			KeyInput += "5";
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void keyID6_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*if (Display2->Text == asctime(st))
+			Display2->Text = "6";
+		else
+		{
+			KeyInput = Display->Text;
+			KeyInput += "6";
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void keyID7_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*if (Display2->Text == asctime(st))
+			Display2->Text = "7";
+		else
+		{
+			KeyInput = Display->Text;
+			KeyInput += "7";
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void keyID8_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*if (Display2->Text == asctime(st))
+			Display2->Text = "8";
+		else
+		{
+			KeyInput = Display->Text;
+			KeyInput += "8";
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void keyID9_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*if (Display2->Text == asctime(st))
+			Display2->Text = "9";
+		else
+		{
+			KeyInput = Display->Text;
+			KeyInput += "9";
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void keyID0_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*if (Display2->Text == asctime(st))
+			Display2->Text = asctime(st);
+		else
+		{
+			KeyInput = Display->Text;
+			KeyInput += "0";
+			Display2->Text = KeyInput;
+		}*/
 	}
 	};
 }
-
 
