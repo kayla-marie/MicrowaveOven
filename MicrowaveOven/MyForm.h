@@ -1,4 +1,8 @@
 #include <chrono>
+#include <iostream>
+#include <time.h>
+#include <string>
+#include <stdlib.h>
 #pragma once
 
 namespace MicrowaveOven {
@@ -15,6 +19,51 @@ namespace MicrowaveOven {
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
 	public:
+		int powerState;
+		//string KeyInput;
+		int switch_power() {
+			switch (powerState) {
+			case 0:
+				Display->Text = "Please press for power level";
+				break;
+			case 1:
+				Display->Text = "Warm";
+				break;
+			case 2:
+				Display->Text = "Low";
+				break;
+			case 3:
+				Display->Text = "Defrost";
+				break;
+			case 4:
+				Display->Text = "Medium-Low";
+				break;
+			case 5:
+				Display->Text = "Medium";
+				break;
+			case 6:
+				Display->Text = "Simmer";
+				break;
+			case 7:
+				Display->Text = "Medium-High";
+				break;
+			case 8:
+				Display->Text = "Reheat";
+				break;
+			case 9:
+				Display->Text = "Saute";
+				break;
+			case 10:
+				Display->Text = "High";
+				break;
+			}
+			powerState++;
+			if (powerState == 11) {
+				powerState = 0;
+			}
+			return powerState;
+		}
+
 		MyForm(void)
 		{
 			InitializeComponent();
@@ -34,6 +83,7 @@ namespace MicrowaveOven {
 				delete components;
 			}
 		}
+
 	private: System::Windows::Forms::Button^ Turntable;
 	private: System::Windows::Forms::Button^ Light;
 	protected:
@@ -918,6 +968,15 @@ namespace MicrowaveOven {
 		}
 #pragma endregion
 
+	//private: System::String getPresentTime(System::Object^ sender, System::EventArgs^ e) {
+	//	time_t tt;
+	//	struct tm* st;
+
+	//	time(&tt);
+	//	st = localtime_s(&tt);
+	//	Display2->Text = asctime(st);
+	//}
+
 
 	private: System::Void Turntable_Click(System::Object^ sender, System::EventArgs^ e) {
 		static bool isOn = true;
@@ -975,13 +1034,13 @@ namespace MicrowaveOven {
 		}
 	}
 	private: System::Void Popcorn_Click(System::Object^ sender, System::EventArgs^ e) {
-		Display->Text = "Popcorn";
+		Display->Text = "Popping Popcorn";
 	}
 	private: System::Void Potato_Click(System::Object^ sender, System::EventArgs^ e) {
-		Display->Text = "Mr. Potato Head";
+		Display->Text = "Baking Potato";
 	}
 	private: System::Void Pizza_Click(System::Object^ sender, System::EventArgs^ e) {
-		Display->Text = "Pizza Pizza";
+		Display->Text = "Making a Pizza";
 	}
 	private: System::Void Cook_Click(System::Object^ sender, System::EventArgs^ e) {
 		Display->Text = "Hey good lookin'\nWhat cha got cookin'?";
@@ -994,17 +1053,35 @@ namespace MicrowaveOven {
 	}
 
 	private: System::Void Microwave_Click(System::Object^ sender, System::EventArgs^ e) {
+		powerState = 6;
+		Display->Text = "Oven set to Microwave. Power Level: Simmer ";
 	}
 	private: System::Void PowerGrill_Click(System::Object^ sender, System::EventArgs^ e) {
+		powerState = 9;
+		Display->Text = "Oven set to PowerGrill. Power Level: Saute";
+
 	}
 	private: System::Void GrillMicrowave_Click(System::Object^ sender, System::EventArgs^ e) {
+		powerState = 10;
+		Display->Text = "Oven set to Grill. Power Level: High";
+
 	}
 	private: System::Void AutoDefrost_Click(System::Object^ sender, System::EventArgs^ e) {
+		powerState = 3;
+		Display->Text = "Oven set to AutoDefrost.";
+
 	}
 	private: System::Void PoundDefrost_Click(System::Object^ sender, System::EventArgs^ e) {
+		powerState = 3;
+		Display->Text = "Oven set to Defrost. Power Level: Defrost";
+
 	}
 	private: System::Void PowerGrillAuto_Click(System::Object^ sender, System::EventArgs^ e) {
+		powerState = 10;
+		Display->Text = "Oven set to Auto PowerGrill. Power Level: High";
+
 	}
+
 	private: System::Void Sound_Click(System::Object^ sender, System::EventArgs^ e) {
 		static int soundState = 0;
 		switch (soundState) {
@@ -1024,7 +1101,9 @@ namespace MicrowaveOven {
 		}
 	}
 	private: System::Void PowerLevel_Click(System::Object^ sender, System::EventArgs^ e) {
+		switch_power();
 	}
+
 	private: System::Void Increase10Sec_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void Decrease10Sec_Click(System::Object^ sender, System::EventArgs^ e) {
