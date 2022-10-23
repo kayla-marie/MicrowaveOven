@@ -1,4 +1,5 @@
 #include <chrono>
+#include <string>
 #include <iostream>
 #include <time.h>
 #include <string>
@@ -968,14 +969,14 @@ namespace MicrowaveOven {
 		}
 #pragma endregion
 
-	//private: System::String getPresentTime(System::Object^ sender, System::EventArgs^ e) {
-	//	time_t tt;
-	//	struct tm* st;
+	/*private: System::String getPresentTime(System::Object^ sender, System::EventArgs^ e) {
+		time_t tt;
+		struct tm* st;
 
-	//	time(&tt);
-	//	st = localtime_s(&tt);
-	//	Display2->Text = asctime(st);
-	//}
+		time(&tt);
+		st = localtime(&tt);
+		Display2->Text = asctime(st);
+	}*/
 
 
 	private: System::Void Turntable_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -1051,7 +1052,6 @@ namespace MicrowaveOven {
 	private: System::Void Veggies_Click(System::Object^ sender, System::EventArgs^ e) {
 		Display->Text = "Veggin' out\nwith my cucumber out";
 	}
-
 	private: System::Void Microwave_Click(System::Object^ sender, System::EventArgs^ e) {
 		powerState = 6;
 		Display->Text = "Oven set to Microwave. Power Level: Simmer ";
@@ -1059,27 +1059,22 @@ namespace MicrowaveOven {
 	private: System::Void PowerGrill_Click(System::Object^ sender, System::EventArgs^ e) {
 		powerState = 9;
 		Display->Text = "Oven set to PowerGrill. Power Level: Saute";
-
 	}
 	private: System::Void GrillMicrowave_Click(System::Object^ sender, System::EventArgs^ e) {
 		powerState = 10;
 		Display->Text = "Oven set to Grill. Power Level: High";
-
 	}
 	private: System::Void AutoDefrost_Click(System::Object^ sender, System::EventArgs^ e) {
 		powerState = 3;
 		Display->Text = "Oven set to AutoDefrost.";
-
 	}
 	private: System::Void PoundDefrost_Click(System::Object^ sender, System::EventArgs^ e) {
 		powerState = 3;
 		Display->Text = "Oven set to Defrost. Power Level: Defrost";
-
 	}
 	private: System::Void PowerGrillAuto_Click(System::Object^ sender, System::EventArgs^ e) {
 		powerState = 10;
 		Display->Text = "Oven set to Auto PowerGrill. Power Level: High";
-
 	}
 
 	private: System::Void Sound_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -1103,10 +1098,37 @@ namespace MicrowaveOven {
 	private: System::Void PowerLevel_Click(System::Object^ sender, System::EventArgs^ e) {
 		switch_power();
 	}
-
 	private: System::Void Increase10Sec_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*int currentTime;
+		string math;
+
+		if (Display2->Text == asctime(st))
+			Display2->Text = "10";
+		else
+		{
+			KeyInput = Display->Text;
+			currentTime = stoi(KeyInput);
+			currentTime += 10;
+			math = itoa((currentTime / 60)) + ':' + itoa((currentTime % 60));
+			KeyInput = math;
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void Decrease10Sec_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*int currentTime;
+		string math;
+
+		if (Display2->Text == asctime(st))
+			Display2->Text = "10";
+		else
+		{
+			KeyInput = Display->Text;
+			currentTime = stoi(KeyInput);
+			currentTime -= 10;
+			math = itoa((currentTime / 60)) + ':' + itoa((currentTime % 60));
+			KeyInput = math;
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void OK_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
@@ -1132,6 +1154,20 @@ namespace MicrowaveOven {
 	}
 
 	private: System::Void Increase30Sec_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*int currentTime;
+		string math;
+
+		if (Display2->Text == asctime(st))
+			Display2->Text = "30";
+		else
+		{
+			KeyInput = Display->Text;
+			currentTime = stoi(KeyInput);
+			currentTime += 30;
+			math = itoa((currentTime / 60)) + ':' + itoa((currentTime % 60));
+			KeyInput = math;
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void Start_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
@@ -1156,26 +1192,106 @@ namespace MicrowaveOven {
 			   //We can either set the timer to what the user specifies and decrement, or we can increment starting and 0 and stopping at user input time (which may be easier)
 
 	private: System::Void keyID1_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*if (Display2->Text == asctime(st))
+			Display2->Text = "1";
+		else
+		{
+			KeyInput = Display->Text;
+			KeyInput += "1";
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void keyID2_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*if (Display2->Text == asctime(st))
+			Display2->Text = "2";
+		else
+		{
+			KeyInput = Display->Text;
+			KeyInput += "2";
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void keyID3_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*if (Display2->Text == asctime(st))
+			Display2->Text = "3";
+		else
+		{
+			KeyInput = Display->Text;
+			KeyInput += "3";
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void keyID4_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*if (Display2->Text == asctime(st))
+			Display2->Text = "4";
+		else
+		{
+			KeyInput = Display->Text;
+			KeyInput += "4";
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void keyID5_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*if (Display2->Text == asctime(st))
+			Display2->Text = "5";
+		else
+		{
+			KeyInput = Display->Text;
+			KeyInput += "5";
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void keyID6_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*if (Display2->Text == asctime(st))
+			Display2->Text = "6";
+		else
+		{
+			KeyInput = Display->Text;
+			KeyInput += "6";
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void keyID7_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*if (Display2->Text == asctime(st))
+			Display2->Text = "7";
+		else
+		{
+			KeyInput = Display->Text;
+			KeyInput += "7";
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void keyID8_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*if (Display2->Text == asctime(st))
+			Display2->Text = "8";
+		else
+		{
+			KeyInput = Display->Text;
+			KeyInput += "8";
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void keyID9_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*if (Display2->Text == asctime(st))
+			Display2->Text = "9";
+		else
+		{
+			KeyInput = Display->Text;
+			KeyInput += "9";
+			Display2->Text = KeyInput;
+		}*/
 	}
 	private: System::Void keyID0_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*if (Display2->Text == asctime(st))
+			Display2->Text = asctime(st);
+		else
+		{
+			KeyInput = Display->Text;
+			KeyInput += "0";
+			Display2->Text = KeyInput;
+		}*/
 	}
-	};
+};
 }
 
 
